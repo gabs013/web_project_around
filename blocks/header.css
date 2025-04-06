@@ -1,0 +1,46 @@
+.header__content {
+  display: flex;
+  /*justify-content: space-between; /*Prueba*/
+  padding: 40px 200px 0 200px;
+}
+
+.header__image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.header__profile {
+  display: flex;
+  justify-content: center;
+  /*align-items: center;*/
+}
+
+.header__profile_name {
+  padding-left: 20px; /*corroborar*/
+  font-family: Inter;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.header__edit-button {
+  width: 24px;
+  height: 24px;
+  align-self: center;
+  padding-left: 10px;
+}
+
+.header__description {
+  padding-left: 20px;
+  font-family: Inter;
+  font-weight: 400;
+  color: #ffffff;
+  /*align-self: flex-start;*/
+}
+
+.header__add-button {
+  width: 150px;
+  height: 50px;
+  align-self: center;
+  padding-left: 310px; /*122px;*/
+}
