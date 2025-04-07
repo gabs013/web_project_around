@@ -16,6 +16,7 @@
 }
 
 .popup__container {
+  position: relative; /*prueba*/
   width: 430px;
   height: 330px;
   padding: 34px 36px;
@@ -57,4 +58,19 @@
   cursor: pointer;
   /*margin: 0 auto;*/
   margin-top: 10px;
+}
+
+.popup__container_close-button {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: -35px; /*125px;*/
+  right: -35px; /*425px;*/
+  cursor: pointer;
+  /*padding: 0;*/
+}
+
+.popup__container_close-icon {
+  width: 30px; /*40.7px;*/
+  height: 30px; /*40.7px;*/
 }
