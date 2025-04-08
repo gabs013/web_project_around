@@ -21,9 +21,15 @@
         </button>
         <form class="popup__form form">
           <legend class="popup__form_title">Editar perfil</legend>
-          <input type="text" class="popup__form_input" placeholder="Nombre" />
           <input
             type="text"
+            id="inputName"
+            class="popup__form_input"
+            placeholder="Nombre"
+          />
+          <input
+            type="text"
+            id="inputDescription"
             class="popup__form_input"
             placeholder="Acerca de mí"
           />
@@ -47,21 +53,23 @@
           />
         </nav>
         <div class="header__content">
-          <img
-            src="./images/gabs.png"
-            alt="Fotografía de la autora de esta página: Gabriela Arroyo"
-            class="header__image"
-          />
-          <div class="header__info">
-            <div class="header__profile">
-              <h1 class="header__profile_name">Gabriela Arroyo</h1>
-              <img
-                src="./images/edit-button.png"
-                alt="Botón para editar el texto"
-                class="header__edit-button"
-              />
+          <div class="header__left">
+            <img
+              src="./images/gabs.png"
+              alt="Fotografía de la autora de esta página: Gabriela Arroyo"
+              class="header__image"
+            />
+            <div class="header__info">
+              <div class="header__profile">
+                <h1 class="header__profile_name">Gabriela Arroyo</h1>
+                <img
+                  src="./images/edit-button.png"
+                  alt="Botón para editar el texto"
+                  class="header__edit-button"
+                />
+              </div>
+              <span class="header__description">Estudiante de Tripleten</span>
             </div>
-            <span class="header__description">Estudiante de Tripleten</span>
           </div>
           <img
             src="./images/add-button.png"
