@@ -7,7 +7,7 @@
   grid-template-columns: 282px 282px 282px;
   gap: 15px;
   border-radius: 10px;
-  background-color: #db1e9c;
+  /*background-color: #db1e9c;*/
 }
 
 .gallery__photo {
