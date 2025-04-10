@@ -23,6 +23,12 @@
   object-fit: cover;
 }
 
+.gallery__text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .gallery__footer {
   width: 282px;
   height: 79px;
