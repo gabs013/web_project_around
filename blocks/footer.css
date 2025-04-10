@@ -1,3 +1,11 @@
 .footer {
+  max-width: 318px;
+  max-height: 18px;
+  padding-top: 67px;
+  padding-bottom: 60px;
+  padding-left: 200px;
   color: #ffffff;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 18px;
 }
