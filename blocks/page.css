@@ -7,3 +7,17 @@
   font-family: Arial, sans-serif;
   background-color: #000000;
 }
+
+@media screen and (max-width: 768px) {
+  .page {
+    width: 100%;
+    /*max-width: 768px;
+    margin: 0 auto;*/
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .page {
+    width: 100%;
+  }
+}

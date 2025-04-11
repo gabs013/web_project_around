@@ -2,9 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 45px;
-  /*padding: 45px 200px 0 200px;*/ /*posibilidad*/
 }
 
-/*.nav__logo {
-}*/
+.nav__logo {
+  max-width: 880px;
+  max-height: 74px;
+  margin: 45px 200px 0;
+}

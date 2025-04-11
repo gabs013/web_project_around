@@ -3,9 +3,11 @@
 }
 
 .header__content {
+  max-width: 880px;
+  max-height: 120px;
   display: flex;
-  justify-content: space-between; /*Prueba*/
-  padding: 40px 200px 0 200px;
+  justify-content: space-between;
+  margin: 40px 200px 0;
 }
 
 .header__left {
@@ -15,21 +17,25 @@
 }
 
 .header__image {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
 }
 
 .header__profile {
   display: flex;
   justify-content: center;
-  /*align-items: center;*/
+  align-items: center;
 }
 
 .header__profile_name {
-  padding-left: 20px; /*corroborar*/
+  max-width: 373px;
+  max-height: 39px;
+  padding-left: 30px;
   font-family: Inter;
-  font-weight: 400;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
   color: #ffffff;
 }
 
@@ -37,7 +43,7 @@
   width: 24px;
   height: 24px;
   align-self: center;
-  padding-left: 20px;
+  padding-left: 18px;
   cursor: pointer;
 }
 
@@ -46,17 +52,18 @@
 }
 
 .header__description {
-  padding-left: 20px;
+  max-width: 415px;
+  max-height: 22px;
+  padding-left: 30px;
   font-family: Inter;
   font-weight: 400;
+  font-size: 18px;
   color: #ffffff;
-  /*align-self: flex-start;*/
 }
 
 .header__add-button {
   width: 150px;
   height: 50px;
   align-self: center;
-  /*padding-left: 310px; /*122px;*/
   cursor: pointer;
 }
