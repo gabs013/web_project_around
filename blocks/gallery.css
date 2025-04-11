@@ -56,3 +56,14 @@
   padding-bottom: 31px;
   cursor: pointer;
 }
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 282px;
+    margin: 0 auto;
+    padding-top: 260px;
+    gap: 20px;
+  }
+}

@@ -4,10 +4,14 @@
   align-items: center;
 }
 
-.nav__logo {
+.nav__logo-desktop {
   max-width: 880px;
   max-height: 74px;
   margin: 45px 200px 0;
+}
+
+.nav__logo-mobile {
+  display: none;
 }
 
 /*@media screen and (max-width: 768px) {
@@ -18,3 +22,21 @@
     display: block;
   }
 }*/
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  /*.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }*/
+  .nav__logo-desktop {
+    display: none;
+  }
+
+  .nav__logo-mobile {
+    display: block;
+    width: 320px;
+    height: 56px;
+    margin-top: 28px;
+  }
+}

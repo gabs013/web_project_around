@@ -89,3 +89,27 @@
   width: 30px; /*40.7px;*/
   height: 30px; /*40.7px;*/
 }
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .popup__container {
+    width: 282px;
+    height: 322px;
+    margin-top: 123px;
+  }
+
+  .popup__form_title {
+    width: 238px;
+    height: 22px;
+    font-size: 18px;
+  }
+
+  .popup__form_input {
+    width: 238px;
+    height: 26px;
+  }
+
+  .popup__form_submit-button {
+    width: 238px;
+    height: 46px;
+  }
+}

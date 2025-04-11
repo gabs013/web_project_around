@@ -14,10 +14,13 @@
     /*max-width: 768px;
     margin: 0 auto;
   }
-}
+}*/
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
   .page {
     width: 100%;
+    min-width: 320px;
+    max-height: 2814px;
+    margin: 0 auto;
   }
-}*/
+}

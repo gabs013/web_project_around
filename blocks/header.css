@@ -61,11 +61,15 @@
   color: #ffffff;
 }
 
-.header__add-button {
+.header__add-button-desktop {
   width: 150px;
   height: 50px;
   align-self: center;
   cursor: pointer;
+}
+
+.header__add-button-mobile {
+  display: none;
 }
 
 /*@media screen and (min-width: 768px) {
@@ -76,10 +80,51 @@
     /*max-width: 768px;
     margin: 0 auto;
   }
-}
+}*/
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
   .header__content {
-    width: 100%;
+    width: 282px;
+    height: 286px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*justify-content: space-around;*/
+    /*margin: 42px 19px 0;*/
+    margin: 42px auto 0;
   }
-}*/
+
+  .header__left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header__image {
+    margin-bottom: 15px; /*30px*/
+  }
+
+  .header__profile_name {
+    font-size: 22px;
+  }
+
+  .header__edit-button {
+    width: 18px;
+    height: 18px;
+  }
+
+  .header__description {
+    font-size: 14px;
+  }
+
+  .header__add-button-desktop {
+    display: none;
+  }
+
+  .header__add-button-mobile {
+    display: block;
+    width: 282px;
+    height: 50px;
+    margin-top: 36px;
+  }
+}
