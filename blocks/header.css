@@ -67,3 +67,19 @@
   align-self: center;
   cursor: pointer;
 }
+
+/*@media screen and (min-width: 768px) {
+  .header__content {
+    max-width: 568px;
+    max-height: 200px;
+    display: flex;
+    /*max-width: 768px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .header__content {
+    width: 100%;
+  }
+}*/
