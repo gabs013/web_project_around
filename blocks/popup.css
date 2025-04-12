@@ -94,13 +94,11 @@
   height: 30px; /*40.7px;*/
 }
 
-@media screen and (min-width: 581px) and (max-width: 900px) {
+/*@media screen and (min-width: 581px) and (max-width: 900px) {
   .popup__container {
-    /*prueba*/
-    width: 581px;
-    height: 621px;
+    /*prueba
   }
-}
+}*/
 
 @media screen and (min-width: 320px) and (max-width: 580px) {
   .popup__container {
