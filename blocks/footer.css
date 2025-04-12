@@ -10,7 +10,7 @@
   font-size: 18px;
 }
 
-@media screen and (min-width: 581px) and (max-width: 1279px) {
+@media screen and (min-width: 581px) and (max-width: 900px) {
   .footer {
     width: 581px;
     margin: 0 auto;

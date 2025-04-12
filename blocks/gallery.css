@@ -57,7 +57,7 @@
   cursor: pointer;
 }
 
-@media screen and (min-width: 581px) and (max-width: 1279px) {
+@media screen and (min-width: 581px) and (max-width: 900px) {
   .gallery {
     width: 581px;
     display: grid;

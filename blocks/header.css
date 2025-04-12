@@ -82,7 +82,7 @@
   }
 }*/
 
-@media screen and (min-width: 581px) and (max-width: 1279px) {
+@media screen and (min-width: 581px) and (max-width: 900px) {
   .header__content {
     width: 581px;
     height: 587px;
