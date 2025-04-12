@@ -16,13 +16,13 @@
   }
 }*/
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 581px) and (max-width: 1279px) {
   .page {
-    min-width: 768px;
+    min-width: 581px;
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (min-width: 320px) and (max-width: 580px) {
   .page {
     width: 100%;
     min-width: 320px;
