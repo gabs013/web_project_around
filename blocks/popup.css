@@ -83,15 +83,14 @@
   background-color: transparent;
   border: none;
   position: absolute;
-  top: -35px; /*125px;*/
-  right: -35px; /*425px;*/
+  top: -35px;
+  right: -35px;
   cursor: pointer;
-  /*padding: 0;*/
 }
 
 .popup__container_close-icon {
-  width: 30px; /*40.7px;*/
-  height: 30px; /*40.7px;*/
+  width: 30px;
+  height: 30px;
 }
 
 /*@media screen and (min-width: 581px) and (max-width: 900px) {
