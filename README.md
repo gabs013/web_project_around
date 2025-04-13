@@ -1,6 +1,6 @@
 # Tripleten web_project_around
 
-# README - Galería de paisajes de Estados Unidos
+# README - Galería de paisajes de Estados Unidos ✈️
 
 ¡Bienvenido/a a este proyecto web que presenta una galería visual con algunos de los paisajes más impresionantes de Estados Unidos! El propósito de esta página es compartir la esencia y belleza natural del país a través de imágenes cuidadosamente seleccionadas. ✨
 
@@ -34,4 +34,4 @@ Para el desarrollo del proyecto se usaron las siguientes herramientas y técnica
 
 Puedes ver el proyecto en línea a través de GitHub Pages:
 
-📁 [Mi proyecto en GitHub Pages]
+📁 [Mi proyecto en GitHub Pages](https://gabs013.github.io/web_project_around/)
