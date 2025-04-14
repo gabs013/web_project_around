@@ -93,7 +93,7 @@
   height: 30px;
 }
 
-.pop__icon-mobile {
+.popup__icon-mobile {
   display: none;
 }
 
@@ -142,7 +142,7 @@
     display: none;
   }
 
-  .pop__icon-mobile {
+  .popup__icon-mobile {
     display: block;
     width: 18px;
     height: 18px;
