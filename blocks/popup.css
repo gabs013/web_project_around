@@ -88,9 +88,13 @@
   cursor: pointer;
 }
 
-.popup__close-icon {
+.popup__icon-desktop {
   width: 30px;
   height: 30px;
+}
+
+.pop__icon-mobile {
+  display: none;
 }
 
 /*@media screen and (min-width: 581px) and (max-width: 900px) {
@@ -127,5 +131,21 @@
     width: 238px;
     height: 46px;
     margin: 0 auto;
+  }
+
+  .popup__close-button {
+    top: -20px;
+    right: -15px;
+  }
+
+  .popup__icon-desktop {
+    display: none;
+  }
+
+  .pop__icon-mobile {
+    display: block;
+    width: 18px;
+    height: 18px;
+    /*top: -10px;*/
   }
 }

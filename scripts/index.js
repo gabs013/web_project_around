@@ -2,7 +2,7 @@ const profileName = document.querySelector(".header__name");
 const profileDescription = document.querySelector(".header__description");
 const editButton = document.querySelector(".header__edit-button");
 const popup = document.querySelector(".popup");
-const popupCloseButton = document.querySelector(".popup__close-icon");
+const popupCloseButtons = document.querySelectorAll(".popup__close-icon");
 const inputName = document.querySelector("#inputName");
 const inputDescription = document.querySelector("#inputDescription");
 const formProfileInformation = document.querySelector(".form");
@@ -26,6 +26,11 @@ function handleChangeInformation(evt) {
 
 editButton.addEventListener("click", handleOpenPopup);
 formProfileInformation.addEventListener("submit", handleChangeInformation);
-popupCloseButton.addEventListener("click", function () {
+
+function handleCloseClick() {
   closePopup();
+}
+
+popupCloseButtons.forEach(function (button) {
+  button.addEventListener("click", handleCloseClick);
 });
