@@ -1,23 +1,27 @@
 const profileName = document.querySelector(".header__name");
 const profileDescription = document.querySelector(".header__description");
 const editButton = document.querySelector(".header__edit-button");
-const popup = document.querySelector(".popup");
-const popupCloseButtons = document.querySelectorAll(".popup__close-icon");
+const popupEditProfile = document.querySelector("#popup-edit-profile");
+const popupEditProfileCloseButtons =
+  document.querySelectorAll(".popup__close-icon");
 const inputName = document.querySelector("#inputName");
 const inputDescription = document.querySelector("#inputDescription");
 const formProfileInformation = document.querySelector(".form");
 /*Nuevo código*/
 const galleryTemplate = document.querySelector("#gallery-template");
 const galleryCardsContainer = document.querySelector(".gallery");
+const popupCreateCards = document.querySelector("#popup-create-cards");
+const galleryAddButton = document.querySelectorAll(".header__create-button");
 
 function handleOpenPopup() {
   inputName.value = profileName.textContent;
   inputDescription.value = profileDescription.textContent;
-  popup.classList.add("popup_opened");
+  popupEditProfile.classList.add("popup_opened");
 }
 
 function closePopup() {
-  popup.classList.remove("popup_opened");
+  popupEditProfile.classList.remove("popup_opened");
+  popupCreateCards.classList.remove("popup_opened");
 }
 
 function handleChangeInformation(evt) {
@@ -50,6 +54,20 @@ function handleCloseClick() {
   closePopup();
 }
 
-popupCloseButtons.forEach(function (button) {
+popupEditProfileCloseButtons.forEach(function (button) {
   button.addEventListener("click", handleCloseClick);
 });
+
+/*galleryAddButtons.forEach((button) => {
+  button.addEventListener("click", function () {
+    popupCreateCards.classList.add("popup_opened");
+  }); código de CHAT GPT
+});*/
+
+galleryAddButton.addEventListener("click", function () {
+  popupCreateCards.classList.add("popup_opened");
+});
+
+/*function closePopup() {
+  popupCreateCards.classList.remove("popup_opened");
+}*/

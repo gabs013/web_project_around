@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body>
-    <div class="popup">
+    <div class="popup" id="popup-edit-profile">
       <div class="popup__container">
         <button type="button" class="popup__close-button">
           <img
@@ -63,7 +63,7 @@
       </div>
     </div>
     <!--Segundo formulario-->
-    <div class="popup">
+    <div class="popup" id="popup-create-cards">
       <div class="popup__container">
         <button type="button" class="popup__close-button">
           <img
@@ -86,17 +86,17 @@
             type="text"
             id="inputName"
             class="popup__input"
-            placeholder="Nombre"
+            placeholder="Título"
           />
           <input
             type="text"
             id="inputDescription"
             class="popup__input"
-            placeholder="Acerca de mí"
+            placeholder="Enlace a la imagen"
           />
           <button type="submit" class="popup__button">
             <img
-              src="./images/submit-button-desktop.png"
+              src="./images/create-button-desktop.png"
               alt="Botón de enviar de desktop"
               class="popup__submit-button-desktop"
             />
@@ -104,7 +104,7 @@
 
           <button type="submit" class="popup__button">
             <img
-              src="./images/submit-button-mobile.png"
+              src="./images/create-button-mobile.png"
               alt="Botón de enviar de móvil"
               class="popup__submit-button-mobile"
             />
@@ -150,13 +150,13 @@
           <img
             src="./images/add-button-desktop.png"
             alt="Botón para agregar contenido"
-            class="header__add-button-desktop"
+            class="header__add-button-desktop header__create-button"
           />
 
           <img
             src="./images/add-button-mobile.png"
             alt="Botón para agragar contenido desde móviles"
-            class="header__add-button-mobile"
+            class="header__add-button-mobile header__create-button"
           />
         </div>
       </header>
