@@ -12,6 +12,8 @@ const galleryTemplate = document.querySelector("#gallery-template");
 const galleryCardsContainer = document.querySelector(".gallery");
 const popupCreateCards = document.querySelector("#popup-create-cards");
 const galleryAddButton = document.querySelectorAll(".header__create-button");
+const inputCardTitle = document.querySelector("#input-card-title");
+const inputCardImage = document.querySelector("#input-card-image");
 
 function handleOpenPopup() {
   inputName.value = profileName.textContent;
@@ -58,14 +60,10 @@ popupEditProfileCloseButtons.forEach(function (button) {
   button.addEventListener("click", handleCloseClick);
 });
 
-/*galleryAddButtons.forEach((button) => {
+galleryAddButton.forEach((button) => {
   button.addEventListener("click", function () {
     popupCreateCards.classList.add("popup_opened");
-  }); código de CHAT GPT
-});*/
-
-galleryAddButton.addEventListener("click", function () {
-  popupCreateCards.classList.add("popup_opened");
+  });
 });
 
 /*function closePopup() {
