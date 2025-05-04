@@ -22,6 +22,10 @@ function handleOpenPopup() {
   popupEditProfile.classList.add("popup_opened");
 }
 
+function handleCloseClick() {
+  closePopup();
+}
+
 function closePopup() {
   popupEditProfile.classList.remove("popup_opened");
   popupCreateCards.classList.remove("popup_opened");
@@ -46,32 +50,34 @@ function createGallery(name, link) {
   galleryImage.src = link;
   galleryText.textContent = name;
   galleryCardsContainer.prepend(galleryCard);
+
+  return galleryCard;
 }
 
 createGallery();
 
+/*código del sprint 7 */
 editButton.addEventListener("click", handleOpenPopup);
 formProfileInformation.addEventListener("submit", handleChangeInformation);
 
-function handleCloseClick() {
-  closePopup();
-}
+/*Aquí estaba la función handle popup*/
 
 popupEditProfileCloseButtons.forEach(function (button) {
   button.addEventListener("click", handleCloseClick);
 });
+/*Final del código sprint 7 */
 
+/*Nuevo código*/
 galleryAddButton.forEach((button) => {
   button.addEventListener("click", function () {
     popupCreateCards.classList.toggle("popup_opened");
   });
 });
 
+/*Va primero*/
 formCreateCard.addEventListener("submit", function (evt) {
   evt.preventDefault();
   createGallery(inputCardTitle.value, inputCardImage.value);
+  formCreateCard.reset();
+  closePopup();
 });
-
-/*function closePopup() {
-  popupCreateCards.classList.remove("popup_opened");
-}*/
