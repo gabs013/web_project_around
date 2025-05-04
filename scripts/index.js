@@ -6,7 +6,7 @@ const popupEditProfileCloseButtons =
   document.querySelectorAll(".popup__close-icon");
 const inputName = document.querySelector("#inputName");
 const inputDescription = document.querySelector("#inputDescription");
-const formProfileInformation = document.querySelector(".form");
+const formProfileInformation = document.querySelector("#form-edit-profile");
 /*Nuevo código*/
 const galleryTemplate = document.querySelector("#gallery-template");
 const galleryCardsContainer = document.querySelector(".gallery");
@@ -14,6 +14,7 @@ const popupCreateCards = document.querySelector("#popup-create-cards");
 const galleryAddButton = document.querySelectorAll(".header__create-button");
 const inputCardTitle = document.querySelector("#input-card-title");
 const inputCardImage = document.querySelector("#input-card-image");
+const formCreateCard = document.querySelector("#form-create-card");
 
 function handleOpenPopup() {
   inputName.value = profileName.textContent;
@@ -44,7 +45,7 @@ function createGallery(name, link) {
 
   galleryImage.src = link;
   galleryText.textContent = name;
-  galleryCardsContainer.append(galleryCard);
+  galleryCardsContainer.prepend(galleryCard);
 }
 
 createGallery();
@@ -62,8 +63,13 @@ popupEditProfileCloseButtons.forEach(function (button) {
 
 galleryAddButton.forEach((button) => {
   button.addEventListener("click", function () {
-    popupCreateCards.classList.add("popup_opened");
+    popupCreateCards.classList.toggle("popup_opened");
   });
+});
+
+formCreateCard.addEventListener("submit", function (evt) {
+  evt.preventDefault();
+  createGallery(inputCardTitle.value, inputCardImage.value);
 });
 
 /*function closePopup() {
