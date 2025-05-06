@@ -12,7 +12,45 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 }
+
+.gallery__trash-button {
+  width: 18px;
+  height: 19px;
+  position: absolute;
+  padding: 18px 15px 244.7px 249px;
+  cursor: pointer;
+  /*box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); /* Sombra */
+  transition: opacity 0.3s;
+}
+
+/*.gallery__trash-normal {
+  z-index: 1;
+}
+
+.gallery__trash-hover {
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gallery__trash-normal:hover + .gallery__trash-hover {
+  opacity: 1;
+}
+
+.gallery__trash-normal:hover {
+  opacity: 0;
+}*/
+
+.gallery__trash-button:hover {
+  opacity: 0.3;
+}
+
+/*.gallery__trash-button:active {
+  opacity: 0.3; /* Casi transparente al hacer clic
+  transform: scale(0.95);  (Opcional) Efecto de clic visual
+}*/
 
 .gallery__about-places {
   width: 282px;
@@ -49,12 +87,19 @@
 }
 
 .gallery__icon {
+  background: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
   width: 21px;
   height: 19px;
   padding-top: 25px;
   padding-right: 15px;
   padding-bottom: 31px;
   cursor: pointer;
+}
+
+.gallery__like-button-on {
+  display: none;
 }
 
 @media screen and (min-width: 581px) and (max-width: 900px) {
