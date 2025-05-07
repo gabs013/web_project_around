@@ -15,7 +15,13 @@ const galleryAddButton = document.querySelectorAll(".header__create-button");
 const inputCardTitle = document.querySelector("#input-card-title");
 const inputCardImage = document.querySelector("#input-card-image");
 const formCreateCard = document.querySelector("#form-create-card");
-/*Aquí moví el form antes de los input y a ellos los llamo desde el form*/
+/*Código para agregar el popup de agrandar imagen*/
+const popupImage = document.querySelector(".popup-image");
+const popupImageCloseButtons =
+  popupImage.querySelectorAll(".popup__close-icon");
+/*const popupImageExtended = popupImage.querySelector(".popup__image");
+const popupImageCaption = popupImage.querySelector(".popup__image-caption");
+*/
 
 const initialCards = [
   {
@@ -59,9 +65,29 @@ function handleCloseClick() {
   closePopup();
 }
 
+/*Código prueba para abrir popup*/
+/*function openPopup(popupElement) {
+  popupElement.classList.add("popup_opened");
+  /*popupImage.classList.remove("popup_opened");
+}*/
+
 function closePopup() {
+  /*popupElement.classList.remove("popup_opened");*/
   popupEditProfile.classList.remove("popup_opened");
   popupCreateCards.classList.remove("popup_opened");
+  /*popupImage.classList.remove("popup_opened");*/
+}
+
+/*Código popup para agrandar imagen*/
+function openImagePopup(imageUrl, captionText) {
+  const popupImageElement = popupImage.querySelector(".popup__image");
+  const popupCaptionElement = popupImage.querySelector(".popup__image-caption");
+
+  popupImageElement.src = imageUrl;
+  popupImageElement.alt = captionText;
+  popupCaptionElement.textContent = captionText;
+
+  popupImage.classList.add("popup_opened");
 }
 
 function handleChangeInformation(evt) {
@@ -78,6 +104,16 @@ initialCards.forEach((item) => {
   galleryCardsContainer.append(card);
 });
 
+/*Cerrar botón de imagen agrandada*/
+/*popupImageCloseButtons.addEventListener("click", function () {
+  popupImage.classList.remove("popup_opened");
+});*/
+popupImageCloseButtons.forEach((button) => {
+  button.addEventListener("click", function () {
+    popupImage.classList.remove("popup_opened");
+  });
+});
+
 function createGallery(name, link) {
   const galleryCard = galleryTemplate
     .cloneNode(true)
@@ -92,6 +128,11 @@ function createGallery(name, link) {
   galleryImage.src = link;
   galleryText.textContent = name;
   galleryCardsContainer.prepend(galleryCard);
+
+  /*Código del popup imagen alargada*/
+  galleryImage.addEventListener("click", () => {
+    openImagePopup(link, name);
+  });
 
   // Evento de click para alternar el botón de like
   likeOff.addEventListener("click", () => {

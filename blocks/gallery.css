@@ -23,7 +23,12 @@
   cursor: pointer;
   /*box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); /* Sombra */
   transition: opacity 0.3s;
+  display: block; /*Prueba de la noche*/
 }
+
+/*.gallery__photo:hover .gallery__trash-button {
+  display: block; /* Solo aparece al pasar el mouse por la tarjeta si así lo deseas
+}*/
 
 /*.gallery__trash-normal {
   z-index: 1;

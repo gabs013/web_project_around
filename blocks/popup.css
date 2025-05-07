@@ -13,6 +13,8 @@
 
 .popup_opened {
   display: flex;
+  /*visibility: visible; /*código profe*/
+  /*opacity: 1; /*código profe*/
 }
 
 .popup__container {
@@ -95,6 +97,24 @@
 
 .popup__icon-mobile {
   display: none;
+}
+
+/*popup de imagen agrandada*/
+/*.popup-image {
+  position: fixed;
+}*/
+
+.popup__image-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  /*background-color: #000;*/
+  opacity: 50%;
+}
+
+.popup__image-container {
+  position: relative;
+  z-index: 1;
 }
 
 /*@media screen and (min-width: 581px) and (max-width: 900px) {
