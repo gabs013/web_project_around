@@ -19,7 +19,9 @@
   width: 18px;
   height: 19px;
   position: absolute;
-  padding: 18px 15px 244.7px 249px;
+  /*padding: 18px 15px 244.7px 249px;*/
+  top: 10px;
+  right: 10px;
   cursor: pointer;
   /*box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); /* Sombra */
   transition: opacity 0.3s;
