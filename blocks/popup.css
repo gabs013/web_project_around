@@ -13,8 +13,8 @@
 
 .popup_opened {
   display: flex;
-  visibility: visible; /*código profe*/
-  opacity: 1; /*código profe*/
+  visibility: visible;
+  opacity: 1;
 }
 
 .popup__container {
@@ -103,13 +103,6 @@
 .popup-image {
   position: fixed;
 }
-/*.popup__image-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  /*background-color: #000;
-  opacity: 50%;
-}*/
 
 .popup__image-container {
   position: relative;
@@ -120,10 +113,10 @@
   background-color: transparent;
   border: none;
   position: absolute;
-  top: 50px; /* antes -35px*/
-  right: -40px; /* antes -35px*/
+  top: 50px;
+  right: -40px;
   cursor: pointer;
-  z-index: 2; /* asegúrate de que esté por encima*/
+  z-index: 2;
 }
 
 .popup__icon-image-desktop {
@@ -205,10 +198,8 @@
   }
 
   .popup__close-image {
-    top: 60px; /* antes -35px*/
-    right: -35px; /* antes -35px*/
-    /*top: 100px; /* antes -35px
-    left: 295.21px;*/
+    top: 60px;
+    right: -35px;
   }
 
   .popup__icon-image-desktop {

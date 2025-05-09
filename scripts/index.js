@@ -7,7 +7,6 @@ const popupEditProfileCloseButtons =
 const inputName = document.querySelector("#inputName");
 const inputDescription = document.querySelector("#inputDescription");
 const formProfileInformation = document.querySelector("#form-edit-profile");
-/*Nuevo código*/
 const galleryTemplate = document.querySelector("#gallery-template");
 const galleryCardsContainer = document.querySelector(".gallery");
 const popupCreateCards = document.querySelector("#popup-create-cards");
@@ -15,13 +14,9 @@ const galleryAddButton = document.querySelectorAll(".header__create-button");
 const inputCardTitle = document.querySelector("#input-card-title");
 const inputCardImage = document.querySelector("#input-card-image");
 const formCreateCard = document.querySelector("#form-create-card");
-/*Código para agregar el popup de agrandar imagen*/
 const popupImage = document.querySelector(".popup-image");
 const popupImageCloseButtons =
   popupImage.querySelectorAll(".popup__close-icon");
-/*const popupImageExtended = popupImage.querySelector(".popup__image");
-const popupImageCaption = popupImage.querySelector(".popup__image-caption");
-*/
 
 const initialCards = [
   {
@@ -65,17 +60,9 @@ function handleCloseClick() {
   closePopup();
 }
 
-/*Código prueba para abrir popup*/
-/*function openPopup(popupElement) {
-  popupElement.classList.add("popup_opened");
-  /*popupImage.classList.remove("popup_opened");
-}*/
-
 function closePopup() {
-  /*popupElement.classList.remove("popup_opened");*/
   popupEditProfile.classList.remove("popup_opened");
   popupCreateCards.classList.remove("popup_opened");
-  /*popupImage.classList.remove("popup_opened");*/
 }
 
 /*Código popup para agrandar imagen*/
@@ -97,17 +84,11 @@ function handleChangeInformation(evt) {
   closePopup();
 }
 
-/*Nuevas funciones*/
-
 initialCards.forEach((item) => {
   const card = createGallery(item.name, item.link);
   galleryCardsContainer.append(card);
 });
 
-/*Cerrar botón de imagen agrandada*/
-/*popupImageCloseButtons.addEventListener("click", function () {
-  popupImage.classList.remove("popup_opened");
-});*/
 popupImageCloseButtons.forEach((button) => {
   button.addEventListener("click", function () {
     popupImage.classList.remove("popup_opened");
@@ -129,7 +110,6 @@ function createGallery(name, link) {
   galleryText.textContent = name;
   galleryCardsContainer.prepend(galleryCard);
 
-  /*Código del popup imagen alargada*/
   galleryImage.addEventListener("click", () => {
     openImagePopup(link, name);
   });
@@ -155,25 +135,19 @@ function createGallery(name, link) {
   return galleryCard;
 }
 
-/*código del sprint 7 */
 editButton.addEventListener("click", handleOpenPopup);
 formProfileInformation.addEventListener("submit", handleChangeInformation);
-
-/*Aquí estaba la función handle popup*/
 
 popupEditProfileCloseButtons.forEach(function (button) {
   button.addEventListener("click", handleCloseClick);
 });
-/*Final del código sprint 7 */
 
-/*Nuevo código*/
 galleryAddButton.forEach((button) => {
   button.addEventListener("click", function () {
     popupCreateCards.classList.toggle("popup_opened");
   });
 });
 
-/*Va primero*/
 formCreateCard.addEventListener("submit", function (evt) {
   evt.preventDefault();
   createGallery(inputCardTitle.value, inputCardImage.value);
