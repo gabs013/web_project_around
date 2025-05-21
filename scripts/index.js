@@ -18,6 +18,9 @@ const popupImage = document.querySelector(".popup-image");
 const popupImageCloseButtons =
   popupImage.querySelectorAll(".popup__close-icon");
 
+/*Código de prueba: Válido*/
+const popupSuperpositions = document.querySelectorAll(".popup");
+
 const initialCards = [
   {
     name: "Porcupine Mountains",
@@ -153,4 +156,21 @@ formCreateCard.addEventListener("submit", function (evt) {
   createGallery(inputCardTitle.value, inputCardImage.value);
   formCreateCard.reset();
   closePopup();
+});
+
+/*Código de prueba para las superposiciones: Válido*/
+popupSuperpositions.forEach(function (superposition) {
+  superposition.addEventListener("click", function () {
+    const popup = document.querySelector(".popup_opened");
+    popup.classList.remove("popup_opened");
+  });
+});
+
+/*Código de prueba para cerrar con Escape*/
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    const popup = document.querySelector(".popup_opened");
+    popup.classList.remove("popup_opened");
+  }
 });
