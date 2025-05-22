@@ -15,7 +15,7 @@
   <body>
     <div class="popup" id="popup-edit-profile">
       <!--Overlay prueba para cerrar mis popups con click afuera del formulario-->
-      <div class="popup__overlay"></div>
+      <!--<div class="popup__overlay"></div>-->
       <div class="popup__container">
         <button type="button" class="popup__close-button">
           <img
@@ -44,6 +44,7 @@
             placeholder="Nombre"
             required
           />
+          <span class="inputName-error"></span>
           <input
             type="text"
             id="inputDescription"
@@ -54,11 +55,12 @@
             placeholder="Acerca de mí"
             required
           />
+          <span class="inputDescription-error"></span>
           <button type="submit" class="popup__button">
             <img
               src="./images/submit-button-desktop.png"
               alt="Botón de enviar de desktop"
-              class="popup__submit-button-desktop"
+              class="popup__submit-button-desktop popup__submit"
             />
           </button>
 
@@ -66,7 +68,7 @@
             <img
               src="./images/submit-button-mobile.png"
               alt="Botón de enviar de móvil"
-              class="popup__submit-button-mobile"
+              class="popup__submit-button-mobile popup__submit"
             />
           </button>
         </form>
@@ -102,6 +104,7 @@
             placeholder="Título"
             required
           />
+          <span class="input-card-title-error"></span>
           <input
             type="url"
             id="input-card-image"
@@ -110,11 +113,12 @@
             placeholder="Enlace a la imagen"
             required
           />
+          <span class="input-card-image-error"></span>
           <button type="submit" class="popup__button">
             <img
               src="./images/create-button-desktop.png"
               alt="Botón de enviar de desktop"
-              class="popup__submit-button-desktop"
+              class="popup__submit-button-desktop popup__submit"
             />
           </button>
 
@@ -122,7 +126,7 @@
             <img
               src="./images/create-button-mobile.png"
               alt="Botón de enviar de móvil"
-              class="popup__submit-button-mobile"
+              class="popup__submit-button-mobile popup__submit"
             />
           </button>
         </form>
