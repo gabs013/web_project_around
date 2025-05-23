@@ -19,7 +19,7 @@ const popupImageCloseButtons =
   popupImage.querySelectorAll(".popup__close-icon");
 
 /*Código de prueba: Válido*/
-/*const popupSuperpositions = document.querySelectorAll(".popup");*/
+const popupSuperpositions = document.querySelectorAll(".popup");
 
 const initialCards = [
   {
@@ -159,18 +159,19 @@ formCreateCard.addEventListener("submit", function (evt) {
 });
 
 /*Código de prueba para las superposiciones: Válido*/
-/*popupSuperpositions.forEach(function (superposition) {
-  superposition.addEventListener("click", function () {
-    const popup = document.querySelector(".popup_opened");
-    popup.classList.remove("popup_opened");
+popupSuperpositions.forEach(function (superposition) {
+  superposition.addEventListener("click", function (event) {
+    if (event.target === superposition) {
+      superposition.classList.remove("popup_opened");
+    }
   });
-});*/
+});
 
 /*Código de prueba para cerrar con Escape*/
 
-/*document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     const popup = document.querySelector(".popup_opened");
     popup.classList.remove("popup_opened");
   }
-});*/
+});
