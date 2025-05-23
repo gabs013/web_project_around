@@ -26,26 +26,29 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const toggleButtonState = (inputList, buttonElement) => {
-  /*Me quedé en esta línea de código. Se supone está bien hecha.*/
-  console.log(hasInvalidInput(inputList));
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add("button_inactive");
-    buttonElement.disabled = true;
-  } else {
-    buttonElement.classList.remove("button_inactive");
-    buttonElement.disabled = false;
-  }
+const toggleButtonState = (inputList, buttonElements) => {
+  const invalid = hasInvalidInput(inputList);
+  buttonElements.forEach((buttonElement) => {
+    if (invalid) {
+      buttonElement.classList.add("button_inactive");
+      buttonElement.disabled = true;
+    } else {
+      buttonElement.classList.remove("button_inactive");
+      buttonElement.disabled = false;
+    }
+  });
 };
 
 const setEventListeners = (formElement) => {
   /*Me quedé en esta línea de código. Se supone está bien hecha.*/
   const inputList = Array.from(formElement.querySelectorAll(".popup__input"));
-  const submitButton = formElement.querySelector(".popup__submit");
+  const submitButtons = Array.from(
+    formElement.querySelectorAll(".popup__submit")
+  );
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
       checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, submitButton);
+      toggleButtonState(inputList, submitButtons);
     });
   });
 };
