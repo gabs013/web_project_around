@@ -54,6 +54,17 @@
   font-weight: 400;
 }
 
+.popup__input_type_error {
+  border: 1px solid #ff0000;
+}
+
+.popup__input-error_active {
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}
+
 .popup__button {
   background-color: transparent;
   border: none;
