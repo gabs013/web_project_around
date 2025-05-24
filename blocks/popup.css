@@ -55,13 +55,20 @@
 }
 
 .popup__input_type_error {
-  border: 1px solid #ff0000;
+  border: none;
+  border-bottom: 2px solid #e53935; /*#ff0000*/
+  outline: none;
+  transition: border-bottom 0.3s ease;
 }
 
 .popup__input-error_active {
-  color: #ff0000;
+  width: 220px;
+  height: 16px;
+  font-family: Inter;
+  font-weight: 400;
   font-size: 12px;
-  margin-top: 5px;
+  color: #e53935; /*#ff0000*/
+  margin-top: -20px;
   display: block;
 }
 
