@@ -1,6 +1,8 @@
 .button_inactive {
-  background-color: rgba(0, 0, 0, 0.8); /*Gris muy claro, casi tranasparente*/
-  color: rgba(0, 0, 0, 0.3); /*Texto desactivado*/
+  background-color: #f4f4f4;
+  color: #c4c4c4;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
   cursor: not-allowed;
   pointer-events: none;
   box-shadow: none;
