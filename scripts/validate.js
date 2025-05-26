@@ -50,14 +50,13 @@ const toggleButtonState = (inputList, buttonElements, configForm) => {
 };
 
 const setEventListeners = (formElement, configForm) => {
-  /*Me quedé en esta línea de código. Se supone está bien hecha.*/
   const inputList = Array.from(
     formElement.querySelectorAll(configForm.inputSelector)
   );
   const submitButtons = Array.from(
     formElement.querySelectorAll(configForm.submitButtonSelector)
   );
-  /*Prueba: Validar estado inicial del botón.*/
+
   toggleButtonState(inputList, submitButtons, configForm);
 
   inputList.forEach((inputElement) => {

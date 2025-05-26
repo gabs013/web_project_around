@@ -17,8 +17,6 @@ const formCreateCard = document.querySelector("#form-create-card");
 const popupImage = document.querySelector(".popup-image");
 const popupImageCloseButtons =
   popupImage.querySelectorAll(".popup__close-icon");
-
-/*Código de prueba: Válido*/
 const popupSuperpositions = document.querySelectorAll(".popup");
 
 const initialCards = [
@@ -158,7 +156,7 @@ formCreateCard.addEventListener("submit", function (evt) {
   closePopup();
 });
 
-/*Código de prueba para las superposiciones: Válido*/
+/*Código para las superposiciones*/
 popupSuperpositions.forEach(function (superposition) {
   superposition.addEventListener("click", function (event) {
     if (event.target === superposition) {
@@ -167,7 +165,7 @@ popupSuperpositions.forEach(function (superposition) {
   });
 });
 
-/*Código de prueba para cerrar con Escape*/
+/*Código para cerrar con Escape*/
 
 document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
