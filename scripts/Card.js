@@ -1,5 +1,90 @@
-/*Carta del profesor Sebastián*/
-const galleryTemplate = document.querySelector("#gallery-template");
+/*Corrección de la clase Card*/
+// handleImageClick es una función que se ejecuta al hacer clic en la imagen
+export default class Card {
+  constructor(name, link, templateSelector, handleImageClick) {
+    this._name = name;
+    this._link = link;
+    this._templateSelector = templateSelector;
+    this._handleImageClick = handleImageClick;
+  }
+
+  //Método para obtener y clonar el Template
+  _getTemplate() {
+    const galleryTemplate = document
+      .querySelector(this._templateSelector)
+      .content.querySelector(".gallery__photo")
+      .cloneNode(true);
+
+    return galleryTemplate;
+  }
+
+  _remove() {
+    this._element.remove();
+  }
+
+  _toggleLike() {
+    const isLiked = this._likeOn.style.display === "inline";
+    this._likeOn.style.display = isLiked ? "none" : "inline";
+    this._likeOff.style.display = isLiked ? "inline" : "none";
+  }
+
+  _clickCard() {
+    this._handleImageClick(this._link, this._name);
+  }
+
+  _setEventListeners() {
+    /*Botones de like*/
+    this._likeOff.addEventListener("click", () => this._toggleLike());
+
+    this._likeOn.addEventListener("click", () => this._toggleLike());
+
+    /*Eliminar carta*/
+    this._trashButton.addEventListener("click", () => {
+      this._remove();
+    });
+
+    /*Hacer grande la imagen*/
+    this._imageElement.addEventListener("click", () => {
+      this._clickCard();
+    });
+  }
+
+  generateCard() {
+    this._element = this._getTemplate();
+
+    this._imageElement = this._element.querySelector(".gallery__about-places");
+    this._textElement = this._element.querySelector(".gallery__name-place");
+    this._likeOff = this._element.querySelector(".gallery__like-button-off");
+    this._likeOn = this._element.querySelector(".gallery__like-button-on");
+    this._trashButton = this._element.querySelector(".gallery__trash-button");
+
+    this._imageElement.src = this._link;
+    this._imageElement.alt = this._name;
+    this._textElement.textContent = this._name;
+
+    this._setEventListeners();
+
+    return this._element;
+  }
+}
+//const cardImage = this._galleryCard.querySelector(".gallery__about-places");
+//const cardLike = this._galleryCard.querySelector(".gallery__like");
+//const cardTrash = this._galleryCard.querySelector(".gallery__trash");
+
+//cardImage.addEventListener("click", () => {
+//this.clickCard();
+//});
+
+//cardLike.addEventListener("click", () => {
+//this.toggleLike();
+//});
+
+//cardTrash.addEventListener("click", () => {
+//this.remove();
+//});
+
+/*Carta del profesor Christian
+
 export default class Card {
   constructor(name, link, templateSelector) {
     this._name = name;
@@ -7,37 +92,7 @@ export default class Card {
     this._templateSelector = templateSelector;
   }
 
-  cloneTemplate() {
-    return galleryTemplate
-      .cloneNode(true)
-      .content.querySelector(".gallery__photo");
-  }
-
-  generateCard() {
-    this.card = this.cloneTemplate();
-    this.cardImage = this.card.querySelector(".gallery__about-places");
-    this.cardText = this.card.querySelector(".gallery__name-place");
-
-    this.cardImage.src = this._link;
-    this.cardText.textContent = this._name;
-
-    return this.card();
-  }
-
-  getHtmlCard() {
-    return this.generateCard();
-  }
-}
-
-/*Carta del profesor Christian
-
-  export default class Card {
-  constructor(name, link, templateSelector) {
-    this._name = name;
-    this._link = link;
-    this._templateSelector = templateSelector;
-  }
-
+  //Método para obtener y clonar el Template
   _getTemplate() {
     const galleryTemplate = document.querySelector(this._templateSelector);
     this._galleryCard = galleryTemplate

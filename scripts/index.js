@@ -9,7 +9,6 @@ const popupEditProfileCloseButtons =
 const inputName = document.querySelector("#inputName");
 const inputDescription = document.querySelector("#inputDescription");
 const formProfileInformation = document.querySelector("#form-edit-profile");
-const galleryTemplate = document.querySelector("#gallery-template");
 const galleryCardsContainer = document.querySelector(".gallery");
 const popupCreateCards = document.querySelector("#popup-create-cards");
 const galleryAddButton = document.querySelectorAll(".header__create-button");
@@ -56,8 +55,8 @@ function handleChangeInformation(evt) {
 }
 
 initialCards.forEach((item) => {
-  const card = createGallery(item.name, item.link);
-  galleryCardsContainer.append(card);
+  const cardElement = createGallery(item.name, item.link);
+  galleryCardsContainer.querySelector(".gallery__photos").append(cardElement);
 });
 
 popupImageCloseButtons.forEach((button) => {
@@ -66,44 +65,11 @@ popupImageCloseButtons.forEach((button) => {
   });
 });
 
+/*Creación de galería de cartas*/
 function createGallery(name, link) {
-  const galleryCard = galleryTemplate
-    .cloneNode(true)
-    .content.querySelector(".gallery__photo");
+  const card = new Card(name, link, "#gallery-template", openImagePopup);
 
-  const galleryImage = galleryCard.querySelector(".gallery__about-places");
-  const galleryText = galleryCard.querySelector(".gallery__name-place");
-
-  const likeOff = galleryCard.querySelector(".gallery__like-button-off");
-  const likeOn = galleryCard.querySelector(".gallery__like-button-on");
-
-  galleryImage.src = link;
-  galleryText.textContent = name;
-  galleryCardsContainer.prepend(galleryCard);
-
-  galleryImage.addEventListener("click", () => {
-    openImagePopup(link, name);
-  });
-
-  // Evento de click para alternar el botón de like
-  likeOff.addEventListener("click", () => {
-    likeOff.style.display = "none";
-    likeOn.style.display = "inline";
-  });
-
-  likeOn.addEventListener("click", () => {
-    likeOn.style.display = "none";
-    likeOff.style.display = "inline";
-  });
-
-  const trashButton = galleryCard.querySelectorAll(".gallery__trash-button");
-  trashButton.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      galleryCard.remove();
-    });
-  });
-
-  return galleryCard;
+  return card.generateCard();
 }
 
 editButton.addEventListener("click", handleOpenPopup);
@@ -121,7 +87,8 @@ galleryAddButton.forEach((button) => {
 
 formCreateCard.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  createGallery(inputCardTitle.value, inputCardImage.value);
+  const newCard = createGallery(inputCardTitle.value, inputCardImage.value);
+  galleryCardsContainer.querySelector(".gallery__photos").prepend(newCard);
   formCreateCard.reset();
   closePopup();
 });
