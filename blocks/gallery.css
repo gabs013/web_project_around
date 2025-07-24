@@ -84,7 +84,7 @@
   color: #000000;
 }
 
-.gallery__icon {
+.gallery__like-button {
   background: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -96,9 +96,17 @@
   cursor: pointer;
 }
 
-.gallery__like-button-on {
-  display: none;
+.gallery__like-button {
+  content: url("../images/Vector.svg");
 }
+
+.gallery__like-button--active {
+  content: url("../images/Union.png");
+}
+
+/*.gallery__like-button-on {
+  display: none;
+}*/
 
 @media screen and (min-width: 581px) and (max-width: 900px) {
   .gallery {

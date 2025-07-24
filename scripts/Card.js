@@ -23,9 +23,7 @@ export default class Card {
   }
 
   _toggleLike() {
-    const isLiked = this._likeOn.style.display === "inline";
-    this._likeOn.style.display = isLiked ? "none" : "inline";
-    this._likeOff.style.display = isLiked ? "inline" : "none";
+    this._likeButton.classList.toggle("gallery__like-button--active");
   }
 
   _clickCard() {
@@ -34,9 +32,7 @@ export default class Card {
 
   _setEventListeners() {
     /*Botones de like*/
-    this._likeOff.addEventListener("click", () => this._toggleLike());
-
-    this._likeOn.addEventListener("click", () => this._toggleLike());
+    this._likeButton.addEventListener("click", () => this._toggleLike());
 
     /*Eliminar carta*/
     this._trashButton.addEventListener("click", () => {
@@ -54,8 +50,7 @@ export default class Card {
 
     this._imageElement = this._element.querySelector(".gallery__about-places");
     this._textElement = this._element.querySelector(".gallery__name-place");
-    this._likeOff = this._element.querySelector(".gallery__like-button-off");
-    this._likeOn = this._element.querySelector(".gallery__like-button-on");
+    this._likeButton = this._element.querySelector(".gallery__like-button");
     this._trashButton = this._element.querySelector(".gallery__trash-button");
 
     this._imageElement.src = this._link;
