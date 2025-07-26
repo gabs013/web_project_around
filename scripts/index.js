@@ -1,4 +1,5 @@
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
 import { initialCards } from "./utils.js";
 const profileName = document.querySelector(".header__name");
 const profileDescription = document.querySelector(".header__description");
@@ -92,6 +93,24 @@ formCreateCard.addEventListener("submit", function (evt) {
   formCreateCard.reset();
   closePopup();
 });
+
+/*Validación de formularios*/
+const validationConfig = {
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  inactiveButtonClass: "popup__button_inactive",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_active",
+};
+
+const formEditValidator = new FormValidator(
+  validationConfig,
+  formProfileInformation
+);
+formEditValidator.enableValidation();
+
+const formCreateValidator = new FormValidator(validationConfig, formCreateCard);
+formCreateValidator.enableValidation();
 
 /*Código para las superposiciones*/
 popupSuperpositions.forEach(function (superposition) {
