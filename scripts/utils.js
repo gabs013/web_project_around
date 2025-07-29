@@ -30,4 +30,63 @@ const initialCards = [
   },
 ];
 
-export { initialCards };
+//Función para abrir los popups de edición con los datos precargados
+function handleOpenPopup(
+  profileName,
+  profileDescription,
+  inputName,
+  inputDescription,
+  popupElement
+) {
+  inputName.value = profileName.textContent;
+  inputDescription.value = profileDescription.textContent;
+  popupElement.classList.add("popup_opened");
+}
+
+//Función para cerrar todos los popups
+function closePopup(...popups) {
+  popups.forEach((popup) => popup.classList.remove("popup_opened"));
+}
+
+//Controlador para el click en cerrar el popup
+function handleCloseClick(closeFunction) {
+  closeFunction();
+}
+
+//Función para abrir el popup de imagen
+function openImagePopup(imageUrl, captionText, popupElement) {
+  const popupImageElement = popupElement.querySelector(".popup__image");
+  const popupCaptionElement = popupElement.querySelector(
+    ".popup__image-caption"
+  );
+
+  popupImageElement.src = imageUrl;
+  popupImageElement.alt = captionText;
+  popupCaptionElement.textContent = captionText;
+
+  popupElement.classList.add("popup_opened");
+}
+
+//Función para cambiar la información del perfil
+function handleChangeInformation(
+  evt,
+  profileName,
+  profileDescription,
+  inputName,
+  inputDescription,
+  closeFunction
+) {
+  evt.preventDefault();
+  profileName.textContent = inputName.value;
+  profileDescription.textContent = inputDescription.value;
+  closeFunction();
+}
+
+export {
+  initialCards,
+  handleOpenPopup,
+  closePopup,
+  handleCloseClick,
+  openImagePopup,
+  handleChangeInformation,
+};

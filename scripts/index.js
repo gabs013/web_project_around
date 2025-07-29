@@ -1,12 +1,18 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
-import { initialCards } from "./utils.js";
+import {
+  initialCards,
+  handleOpenPopup,
+  closePopup,
+  handleCloseClick,
+  openImagePopup,
+  handleChangeInformation,
+} from "./utils.js";
 const profileName = document.querySelector(".header__name");
 const profileDescription = document.querySelector(".header__description");
 const editButton = document.querySelector(".header__edit-button");
 const popupEditProfile = document.querySelector("#popup-edit-profile");
-const popupEditProfileCloseButtons =
-  document.querySelectorAll(".popup__close-icon");
+const popupCloseButtons = document.querySelectorAll(".popup__close-icon");
 const inputName = document.querySelector("#inputName");
 const inputDescription = document.querySelector("#inputDescription");
 const formProfileInformation = document.querySelector("#form-edit-profile");
@@ -20,40 +26,6 @@ const popupImage = document.querySelector(".popup-image");
 const popupImageCloseButtons =
   popupImage.querySelectorAll(".popup__close-icon");
 const popupSuperpositions = document.querySelectorAll(".popup");
-
-function handleOpenPopup() {
-  inputName.value = profileName.textContent;
-  inputDescription.value = profileDescription.textContent;
-  popupEditProfile.classList.add("popup_opened");
-}
-
-function handleCloseClick() {
-  closePopup();
-}
-
-function closePopup() {
-  popupEditProfile.classList.remove("popup_opened");
-  popupCreateCards.classList.remove("popup_opened");
-}
-
-/*Código popup para agrandar imagen*/
-function openImagePopup(imageUrl, captionText) {
-  const popupImageElement = popupImage.querySelector(".popup__image");
-  const popupCaptionElement = popupImage.querySelector(".popup__image-caption");
-
-  popupImageElement.src = imageUrl;
-  popupImageElement.alt = captionText;
-  popupCaptionElement.textContent = captionText;
-
-  popupImage.classList.add("popup_opened");
-}
-
-function handleChangeInformation(evt) {
-  evt.preventDefault();
-  profileName.textContent = inputName.value;
-  profileDescription.textContent = inputDescription.value;
-  closePopup();
-}
 
 initialCards.forEach((item) => {
   const cardElement = createGallery(item.name, item.link);
@@ -73,17 +45,41 @@ function createGallery(name, link) {
   return card.generateCard();
 }
 
-editButton.addEventListener("click", handleOpenPopup);
-formProfileInformation.addEventListener("submit", handleChangeInformation);
+//Modificado con el código que tengo de utils.js
+editButton.addEventListener("click", () =>
+  handleOpenPopup(
+    profileName,
+    profileDescription,
+    inputName,
+    inputDescription,
+    popupEditProfile
+  )
+);
 
-popupEditProfileCloseButtons.forEach(function (button) {
-  button.addEventListener("click", handleCloseClick);
+//Para cerrar los popups
+popupCloseButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const popup = button.closest(".popup");
+    handleCloseClick(() => closePopup(popup));
+  });
 });
 
+//Código también creado para utils.js
+formProfileInformation.addEventListener("submit", (evt) =>
+  handleChangeInformation(
+    evt,
+    profileName,
+    profileDescription,
+    inputName,
+    inputDescription,
+    () => closePopup(popupEditProfile)
+  )
+);
+
 galleryAddButton.forEach((button) => {
-  button.addEventListener("click", function () {
-    popupCreateCards.classList.toggle("popup_opened");
-  });
+  button.addEventListener("click", () =>
+    popupCreateCards.classList.toggle("popup_opened")
+  );
 });
 
 formCreateCard.addEventListener("submit", function (evt) {
