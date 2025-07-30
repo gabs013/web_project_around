@@ -1,4 +1,3 @@
-/*Corrección de la clase Card*/
 // handleImageClick es una función que se ejecuta al hacer clic en la imagen
 export default class Card {
   constructor(name, link, templateSelector, handleImageClick) {
@@ -31,15 +30,15 @@ export default class Card {
   }
 
   _setEventListeners() {
-    /*Botones de like*/
+    //Botones de like
     this._likeButton.addEventListener("click", () => this._toggleLike());
 
-    /*Eliminar carta*/
+    //Eliminar carta
     this._trashButton.addEventListener("click", () => {
       this._remove();
     });
 
-    /*Hacer grande la imagen*/
+    //Hacer grande la imagen
     this._imageElement.addEventListener("click", () => {
       this._clickCard();
     });
@@ -62,69 +61,3 @@ export default class Card {
     return this._element;
   }
 }
-//const cardImage = this._galleryCard.querySelector(".gallery__about-places");
-//const cardLike = this._galleryCard.querySelector(".gallery__like");
-//const cardTrash = this._galleryCard.querySelector(".gallery__trash");
-
-//cardImage.addEventListener("click", () => {
-//this.clickCard();
-//});
-
-//cardLike.addEventListener("click", () => {
-//this.toggleLike();
-//});
-
-//cardTrash.addEventListener("click", () => {
-//this.remove();
-//});
-
-/*Carta del profesor Christian
-
-export default class Card {
-  constructor(name, link, templateSelector) {
-    this._name = name;
-    this._link = link;
-    this._templateSelector = templateSelector;
-  }
-
-  //Método para obtener y clonar el Template
-  _getTemplate() {
-    const galleryTemplate = document.querySelector(this._templateSelector);
-    this._galleryCard = galleryTemplate
-      .cloneNode(true)
-      .content.querySelector(".gallery__photo");
-
-    const galleryImage = this._galleryCard.querySelector(
-      ".gallery__about-places"
-    );
-    const galleryText = this._galleryCard.querySelector(".gallery__name-place");
-
-    galleryImage.src = this._link;
-    galleryText.textContent = this._name;
-    galleryCardsContainer.prepend(galleryCard);
-  }
-
-  remove() {}
-
-  toggleLike() {}
-
-  clickCard() {}
-
-  _setEventListener() {
-    const cardImage = this._galleryCard.querySelector(".gallery__about-places");
-    const cardLike = this._galleryCard.querySelector(".gallery__like");
-    const cardTrash = this._galleryCard.querySelector(".gallery__trash");
-
-    cardImage.addEventListener("click", () => {
-      this.clickCard();
-    });
-
-    cardLike.addEventListener("click", () => {
-      this.toggleLike();
-    });
-
-    cardTrash.addEventListener("click", () => {
-      this.remove();
-    });
-  }
-}*/

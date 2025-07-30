@@ -38,14 +38,12 @@ popupImageCloseButtons.forEach((button) => {
   });
 });
 
-/*Creación de galería de cartas*/
 function createGallery(name, link) {
   const card = new Card(name, link, "#gallery-template", openImagePopup);
 
   return card.generateCard();
 }
 
-//Modificado con el código que tengo de utils.js
 editButton.addEventListener("click", () =>
   handleOpenPopup(
     profileName,
@@ -56,7 +54,6 @@ editButton.addEventListener("click", () =>
   )
 );
 
-//Para cerrar los popups
 popupCloseButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const popup = button.closest(".popup");
@@ -64,7 +61,6 @@ popupCloseButtons.forEach((button) => {
   });
 });
 
-//Código también creado para utils.js
 formProfileInformation.addEventListener("submit", (evt) =>
   handleChangeInformation(
     evt,

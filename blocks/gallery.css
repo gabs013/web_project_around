@@ -1,25 +1,8 @@
-/*.gallery {
-  max-width: 880px;
-  min-height: 743px;
-  margin: 50px 200px 0;
-  display: grid;
-  grid-template-columns: 282px 282px 282px;
-  gap: 20px 17px;
-  border-radius: 10px;
-}*/
-
 .gallery {
   max-width: 880px;
   min-height: 743px;
   margin: 50px 200px 0;
 }
-
-/*Fotos de las tarjetas*/
-/*.gallery__photos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}*/
 
 .gallery__photos {
   display: grid;
@@ -103,10 +86,6 @@
 .gallery__like-button--active {
   content: url("../images/Union.png");
 }
-
-/*.gallery__like-button-on {
-  display: none;
-}*/
 
 @media screen and (min-width: 581px) and (max-width: 900px) {
   .gallery {
