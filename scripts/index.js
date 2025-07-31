@@ -39,7 +39,10 @@ popupImageCloseButtons.forEach((button) => {
 });
 
 function createGallery(name, link) {
-  const card = new Card(name, link, "#gallery-template", openImagePopup);
+  //const card = new Card(name, link, "#gallery-template", openImagePopup);
+  const card = new Card(name, link, "#gallery-template", (url, caption) =>
+    openImagePopup(url, caption, popupImage)
+  );
 
   return card.generateCard();
 }
@@ -83,7 +86,7 @@ formCreateCard.addEventListener("submit", function (evt) {
   const newCard = createGallery(inputCardTitle.value, inputCardImage.value);
   galleryCardsContainer.querySelector(".gallery__photos").prepend(newCard);
   formCreateCard.reset();
-  closePopup();
+  closePopup(popupCreateCards);
 });
 
 /*Validación de formularios*/
