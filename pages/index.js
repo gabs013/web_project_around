@@ -1,5 +1,5 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 import {
   initialCards,
   handleOpenPopup,
@@ -7,7 +7,7 @@ import {
   handleCloseClick,
   openImagePopup,
   handleChangeInformation,
-} from "./utils.js";
+} from "../utils/constants.js";
 const profileName = document.querySelector(".header__name");
 const profileDescription = document.querySelector(".header__description");
 const editButton = document.querySelector(".header__edit-button");
@@ -41,7 +41,7 @@ popupImageCloseButtons.forEach((button) => {
 function createGallery(name, link) {
   //const card = new Card(name, link, "#gallery-template", openImagePopup);
   const card = new Card(name, link, "#gallery-template", (url, caption) =>
-    openImagePopup(url, caption, popupImage)
+    openImagePopup(url, caption, popupImage),
   );
 
   return card.generateCard();
@@ -53,8 +53,8 @@ editButton.addEventListener("click", () =>
     profileDescription,
     inputName,
     inputDescription,
-    popupEditProfile
-  )
+    popupEditProfile,
+  ),
 );
 
 popupCloseButtons.forEach((button) => {
@@ -71,13 +71,13 @@ formProfileInformation.addEventListener("submit", (evt) =>
     profileDescription,
     inputName,
     inputDescription,
-    () => closePopup(popupEditProfile)
-  )
+    () => closePopup(popupEditProfile),
+  ),
 );
 
 galleryAddButton.forEach((button) => {
   button.addEventListener("click", () =>
-    popupCreateCards.classList.toggle("popup_opened")
+    popupCreateCards.classList.toggle("popup_opened"),
   );
 });
 
@@ -100,7 +100,7 @@ const validationConfig = {
 
 const formEditValidator = new FormValidator(
   validationConfig,
-  formProfileInformation
+  formProfileInformation,
 );
 formEditValidator.enableValidation();
 
