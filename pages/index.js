@@ -1,3 +1,4 @@
+import Section from "../components/Section.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import {
@@ -27,10 +28,26 @@ const popupImageCloseButtons =
   popupImage.querySelectorAll(".popup__close-icon");
 const popupSuperpositions = document.querySelectorAll(".popup");
 
-initialCards.forEach((item) => {
+//Código para renderizar la clase Section
+const gallerySection = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      //AQUÍ va mi lógica real de creación de tarjeta
+      const cardElement = createGallery(item.name, item.link);
+
+      gallerySection.addItem(cardElement);
+    },
+  },
+  ".gallery__photos",
+);
+
+gallerySection.renderItems();
+
+/*initialCards.forEach((item) => {
   const cardElement = createGallery(item.name, item.link);
   galleryCardsContainer.querySelector(".gallery__photos").append(cardElement);
-});
+});*/
 
 popupImageCloseButtons.forEach((button) => {
   button.addEventListener("click", function () {
