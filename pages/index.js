@@ -1,5 +1,6 @@
 import Section from "../components/Section.js";
 import Popup from "../components/Popup.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import {
@@ -53,7 +54,7 @@ gallerySection.renderItems();
 //Instancias de Popup
 const editProfilePopup = new Popup("#popup-edit-profile");
 const createCardPopup = new Popup("#popup-create-cards");
-const imagePopup = new Popup(".popup-image");
+const imagePopup = new PopupWithImage(".popup-image");
 
 //Activar Listeners
 editProfilePopup.setEventListeners();
@@ -79,7 +80,7 @@ imagePopup.setEventListeners();
 }*/
 
 //Función que cierra las imágenes y hace que funcione Esc
-function createGallery(name, link) {
+/*function createGallery(name, link) {
   //const card = new Card(name, link, "#gallery-template", openImagePopup);
   const card = new Card(name, link, "#gallery-template", (url, caption) => {
     const popupImageElement = popupImage.querySelector(".popup__image");
@@ -92,6 +93,14 @@ function createGallery(name, link) {
     popupCaptionElement.textContent = caption;
 
     imagePopup.open();
+  });
+
+  return card.generateCard();
+}*/
+
+function createGallery(name, link) {
+  const card = new Card(name, link, "#gallery-template", (url, caption) => {
+    imagePopup.open(url, caption);
   });
 
   return card.generateCard();
