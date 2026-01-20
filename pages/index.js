@@ -1,4 +1,5 @@
 import Section from "../components/Section.js";
+import Popup from "../components/Popup.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import {
@@ -49,17 +50,49 @@ gallerySection.renderItems();
   galleryCardsContainer.querySelector(".gallery__photos").append(cardElement);
 });*/
 
-popupImageCloseButtons.forEach((button) => {
+//Instancias de Popup
+const editProfilePopup = new Popup("#popup-edit-profile");
+const createCardPopup = new Popup("#popup-create-cards");
+const imagePopup = new Popup(".popup-image");
+
+//Activar Listeners
+editProfilePopup.setEventListeners();
+createCardPopup.setEventListeners();
+imagePopup.setEventListeners();
+
+//Código que pertenece a la clase Popup
+/*popupImageCloseButtons.forEach((button) => {
   button.addEventListener("click", function () {
     popupImage.classList.remove("popup_opened");
   });
-});
+});*/
 
-function createGallery(name, link) {
+//Función para abrir y cerrar imágenes.
+//La modificaré abajo para usar Esc
+/*function createGallery(name, link) {
   //const card = new Card(name, link, "#gallery-template", openImagePopup);
   const card = new Card(name, link, "#gallery-template", (url, caption) =>
     openImagePopup(url, caption, popupImage),
   );
+
+  return card.generateCard();
+}*/
+
+//Función que cierra las imágenes y hace que funcione Esc
+function createGallery(name, link) {
+  //const card = new Card(name, link, "#gallery-template", openImagePopup);
+  const card = new Card(name, link, "#gallery-template", (url, caption) => {
+    const popupImageElement = popupImage.querySelector(".popup__image");
+    const popupCaptionElement = popupImage.querySelector(
+      ".popup__image-caption",
+    );
+
+    popupImageElement.src = url;
+    popupImageElement.alt = caption;
+    popupCaptionElement.textContent = caption;
+
+    imagePopup.open();
+  });
 
   return card.generateCard();
 }
@@ -125,19 +158,20 @@ const formCreateValidator = new FormValidator(validationConfig, formCreateCard);
 formCreateValidator.enableValidation();
 
 /*Código para las superposiciones*/
-popupSuperpositions.forEach(function (superposition) {
+//Código que pertenece a la clase Popup
+/*popupSuperpositions.forEach(function (superposition) {
   superposition.addEventListener("click", function (event) {
     if (event.target === superposition) {
       superposition.classList.remove("popup_opened");
     }
   });
-});
+});*/
 
 /*Código para cerrar con Escape*/
-
-document.addEventListener("keydown", function (event) {
+//Código que pertenece a la clase Popup
+/*document.addEventListener("keydown", function (event) {
   if (event.key === "Escape") {
     const popup = document.querySelector(".popup_opened");
     popup.classList.remove("popup_opened");
   }
-});
+});*/
