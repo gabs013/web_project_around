@@ -51,7 +51,7 @@ const editProfileFormPopup = new PopupWithForm(
     // Actualizar información del usuario
     userInfo.setUserInfo({
       name: inputValues.name,
-      description: inputValues.about, // IMPORTANTE: Esto debe coincidir con el atributo "name" del input
+      description: inputValues.about, //Coincide con el atributo "name" del input
     });
   },
 );
@@ -66,7 +66,7 @@ const createCardFormPopup = new PopupWithForm(
   },
 );
 
-// **FALTABA ESTO: Activar los event listeners de todos los popups**
+//Activar los event listeners de todos los popups**
 imagePopup.setEventListeners();
 editProfileFormPopup.setEventListeners();
 createCardFormPopup.setEventListeners();
@@ -81,7 +81,6 @@ editButton.addEventListener("click", () => {
   form.querySelector("#inputName").value = currentUserInfo.name;
   form.querySelector("#inputDescription").value = currentUserInfo.description;
 
-  // **AGREGAR ESTA LÍNEA**
   formEditValidator.resetValidation();
 
   // Abrir popup
@@ -115,7 +114,6 @@ formEditValidator.enableValidation();
 const formCreateValidator = new FormValidator(validationConfig, formCreateCard);
 formCreateValidator.enableValidation();
 
-// **ESTAS SON LAS 2 LÍNEAS NUEVAS QUE DEBES AGREGAR:**
-// CONECTA LOS VALIDADORES CON LOS POPUPS
+// Conecta los validadores con los popups
 editProfileFormPopup.setFormValidator(formEditValidator);
 createCardFormPopup.setFormValidator(formCreateValidator);

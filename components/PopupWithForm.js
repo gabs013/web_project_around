@@ -27,18 +27,15 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  // **MÉTODO MEJORADO: También llama al reset de validación**
   close() {
     super.close();
     this._form.reset();
   }
 
-  // **NUEVO MÉTODO: Para pasar el validador desde index.js**
   setFormValidator(validator) {
     this._formValidator = validator;
   }
 
-  // **MÉTODO MEJORADO: Sobrescribe el open() para resetear validación si existe**
   open() {
     super.open();
     if (this._formValidator) {

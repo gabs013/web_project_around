@@ -2,7 +2,7 @@ export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
 
-    //Bind para que "this" no se pierda cuando se use como callback
+    //Bind se usa para que "this" no se pierda cuando se use como callback
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 

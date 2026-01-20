@@ -72,7 +72,6 @@ export default class FormValidator {
     return this._inputList.some((inputElement) => !inputElement.validity.valid);
   }
 
-  // **NUEVO MÉTODO: Resetear la validación**
   resetValidation() {
     this._inputList.forEach((inputElement) => {
       const errorElement = this._formElement.querySelector(
