@@ -1,4 +1,3 @@
-// handleImageClick es una función que se ejecuta al hacer clic en la imagen
 export default class Card {
   constructor(name, link, templateSelector, handleImageClick) {
     this._name = name;
