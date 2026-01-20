@@ -1,116 +1,98 @@
 import Section from "../components/Section.js";
-import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import {
-  initialCards,
-  handleOpenPopup,
-  closePopup,
-  handleCloseClick,
-  openImagePopup,
-  handleChangeInformation,
-} from "../utils/constants.js";
-const profileName = document.querySelector(".header__name");
-const profileDescription = document.querySelector(".header__description");
-const editButton = document.querySelector(".header__edit-button");
-const popupEditProfile = document.querySelector("#popup-edit-profile");
-const popupCloseButtons = document.querySelectorAll(".popup__close-icon");
-const inputName = document.querySelector("#inputName");
-const inputDescription = document.querySelector("#inputDescription");
-//Código de PopupWithForm
-const formProfileInformation = document.querySelector("#form-edit-profile");
-const galleryCardsContainer = document.querySelector(".gallery");
-const popupCreateCards = document.querySelector("#popup-create-cards");
-const galleryAddButton = document.querySelectorAll(".header__create-button");
-const inputCardTitle = document.querySelector("#input-card-title");
-const inputCardImage = document.querySelector("#input-card-image");
-//Código de PopupWithForm
-const formCreateCard = document.querySelector("#form-create-card");
-const popupImage = document.querySelector(".popup-image");
-const popupImageCloseButtons =
-  popupImage.querySelectorAll(".popup__close-icon");
-const popupSuperpositions = document.querySelectorAll(".popup");
+import { initialCards } from "../utils/constants.js";
 
-//Código para renderizar la clase Section
+// Elementos del DOM
+const editButton = document.querySelector(".header__edit-button");
+const formProfileInformation = document.querySelector("#form-edit-profile");
+const galleryAddButton = document.querySelectorAll(".header__create-button");
+const formCreateCard = document.querySelector("#form-create-card");
+
+// Instancia de UserInfo
+const userInfo = new UserInfo({
+  userNameSelector: ".header__name",
+  userDescriptionSelector: ".header__description",
+});
+
+// Instancia de PopupWithImage
+const imagePopup = new PopupWithImage(".popup-image");
+
+// Función para crear tarjetas
+function createGallery(name, link) {
+  const card = new Card(name, link, "#gallery-template", (url, caption) => {
+    imagePopup.open(url, caption);
+  });
+  return card.generateCard();
+}
+
+// Instancia de Section para renderizar tarjetas iniciales
 const gallerySection = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      //AQUÍ va mi lógica real de creación de tarjeta
       const cardElement = createGallery(item.name, item.link);
-
       gallerySection.addItem(cardElement);
     },
   },
   ".gallery__photos",
 );
 
+// Renderizar tarjetas iniciales
 gallerySection.renderItems();
 
-//Instancias de Popup
-const editProfilePopup = new Popup("#popup-edit-profile");
-const createCardPopup = new Popup("#popup-create-cards");
-const imagePopup = new PopupWithImage(".popup-image");
+// Instancia del popup para editar perfil
+const editProfileFormPopup = new PopupWithForm(
+  "#popup-edit-profile",
+  (inputValues) => {
+    // Actualizar información del usuario
+    userInfo.setUserInfo({
+      name: inputValues.name,
+      description: inputValues.about, // IMPORTANTE: Esto debe coincidir con el atributo "name" del input
+    });
+  },
+);
 
-//Activar Listeners
-editProfilePopup.setEventListeners();
-createCardPopup.setEventListeners();
+// Instancia del popup para crear nuevas tarjetas
+const createCardFormPopup = new PopupWithForm(
+  "#popup-create-cards",
+  (inputValues) => {
+    const newCard = createGallery(inputValues.title, inputValues.link);
+    //gallerySection.addItem(newCard);
+    gallerySection.addItemAtBeginning(newCard);
+  },
+);
+
+// **FALTABA ESTO: Activar los event listeners de todos los popups**
 imagePopup.setEventListeners();
+editProfileFormPopup.setEventListeners();
+createCardFormPopup.setEventListeners();
 
-function createGallery(name, link) {
-  const card = new Card(name, link, "#gallery-template", (url, caption) => {
-    imagePopup.open(url, caption);
-  });
+// Event Listeners para abrir popups
+editButton.addEventListener("click", () => {
+  // Obtener información actual del usuario
+  const currentUserInfo = userInfo.getUserInfo();
 
-  return card.generateCard();
-}
+  // Llenar el formulario con los datos actuales
+  const form = document.querySelector("#form-edit-profile");
+  form.querySelector("#inputName").value = currentUserInfo.name;
+  form.querySelector("#inputDescription").value = currentUserInfo.description;
 
-editButton.addEventListener("click", () =>
-  handleOpenPopup(
-    profileName,
-    profileDescription,
-    inputName,
-    inputDescription,
-    popupEditProfile,
-  ),
-);
-
-popupCloseButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const popup = button.closest(".popup");
-    handleCloseClick(() => closePopup(popup));
-  });
+  // Abrir popup
+  editProfileFormPopup.open();
 });
 
-//Código perteneciente a PopupWithForm
-formProfileInformation.addEventListener("submit", (evt) =>
-  handleChangeInformation(
-    evt,
-    profileName,
-    profileDescription,
-    inputName,
-    inputDescription,
-    () => closePopup(popupEditProfile),
-  ),
-);
-
+// Event Listeners para botones de agregar tarjeta
 galleryAddButton.forEach((button) => {
-  button.addEventListener("click", () =>
-    popupCreateCards.classList.toggle("popup_opened"),
-  );
+  button.addEventListener("click", () => {
+    createCardFormPopup.open();
+  });
 });
 
-//Código perteneciente a PopupWithForm
-formCreateCard.addEventListener("submit", function (evt) {
-  evt.preventDefault();
-  const newCard = createGallery(inputCardTitle.value, inputCardImage.value);
-  galleryCardsContainer.querySelector(".gallery__photos").prepend(newCard);
-  formCreateCard.reset();
-  closePopup(popupCreateCards);
-});
-
-/*Validación de formularios*/
+// Activar validación de formularios
 const validationConfig = {
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__submit",
@@ -119,11 +101,18 @@ const validationConfig = {
   errorClass: "popup__input-error_active",
 };
 
+// Validación para formulario de editar perfil
 const formEditValidator = new FormValidator(
   validationConfig,
   formProfileInformation,
 );
 formEditValidator.enableValidation();
 
+// Validación para formulario de crear tarjeta
 const formCreateValidator = new FormValidator(validationConfig, formCreateCard);
 formCreateValidator.enableValidation();
+
+// **ESTAS SON LAS 2 LÍNEAS NUEVAS QUE DEBES AGREGAR:**
+// CONECTA LOS VALIDADORES CON LOS POPUPS
+editProfileFormPopup.setFormValidator(formEditValidator);
+createCardFormPopup.setFormValidator(formCreateValidator);

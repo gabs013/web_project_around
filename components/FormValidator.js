@@ -14,10 +14,10 @@ export default class FormValidator {
 
   _setEventListeners() {
     this._inputList = Array.from(
-      this._formElement.querySelectorAll(this._inputSelector)
+      this._formElement.querySelectorAll(this._inputSelector),
     );
     this._submitButton = this._formElement.querySelector(
-      this._submitButtonSelector
+      this._submitButtonSelector,
     );
 
     this._toggleButtonState();
@@ -32,14 +32,14 @@ export default class FormValidator {
 
   _checkInputValidity(inputElement) {
     const errorElement = this._formElement.querySelector(
-      `.${inputElement.id}-error`
+      `.${inputElement.id}-error`,
     );
 
     if (!inputElement.validity.valid) {
       this._showInputError(
         inputElement,
         errorElement,
-        inputElement.validationMessage
+        inputElement.validationMessage,
       );
     } else {
       this._hideInputError(inputElement, errorElement);
@@ -70,5 +70,17 @@ export default class FormValidator {
 
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => !inputElement.validity.valid);
+  }
+
+  // **NUEVO MÉTODO: Resetear la validación**
+  resetValidation() {
+    this._inputList.forEach((inputElement) => {
+      const errorElement = this._formElement.querySelector(
+        `.${inputElement.id}-error`,
+      );
+      this._hideInputError(inputElement, errorElement);
+    });
+
+    this._toggleButtonState();
   }
 }

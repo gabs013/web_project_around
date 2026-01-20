@@ -14,4 +14,9 @@ export default class Section {
   addItem(element) {
     this._container.append(element);
   }
+
+  // **NUEVO MÉTODO: Agrega al inicio**
+  addItemAtBeginning(element) {
+    this._container.prepend(element);
+  }
 }
