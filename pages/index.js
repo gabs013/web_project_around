@@ -18,12 +18,14 @@ const popupEditProfile = document.querySelector("#popup-edit-profile");
 const popupCloseButtons = document.querySelectorAll(".popup__close-icon");
 const inputName = document.querySelector("#inputName");
 const inputDescription = document.querySelector("#inputDescription");
+//Código de PopupWithForm
 const formProfileInformation = document.querySelector("#form-edit-profile");
 const galleryCardsContainer = document.querySelector(".gallery");
 const popupCreateCards = document.querySelector("#popup-create-cards");
 const galleryAddButton = document.querySelectorAll(".header__create-button");
 const inputCardTitle = document.querySelector("#input-card-title");
 const inputCardImage = document.querySelector("#input-card-image");
+//Código de PopupWithForm
 const formCreateCard = document.querySelector("#form-create-card");
 const popupImage = document.querySelector(".popup-image");
 const popupImageCloseButtons =
@@ -81,6 +83,7 @@ popupCloseButtons.forEach((button) => {
   });
 });
 
+//Código perteneciente a PopupWithForm
 formProfileInformation.addEventListener("submit", (evt) =>
   handleChangeInformation(
     evt,
@@ -98,6 +101,7 @@ galleryAddButton.forEach((button) => {
   );
 });
 
+//Código perteneciente a PopupWithForm
 formCreateCard.addEventListener("submit", function (evt) {
   evt.preventDefault();
   const newCard = createGallery(inputCardTitle.value, inputCardImage.value);
