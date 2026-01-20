@@ -81,6 +81,9 @@ editButton.addEventListener("click", () => {
   form.querySelector("#inputName").value = currentUserInfo.name;
   form.querySelector("#inputDescription").value = currentUserInfo.description;
 
+  // **AGREGAR ESTA LÍNEA**
+  formEditValidator.resetValidation();
+
   // Abrir popup
   editProfileFormPopup.open();
 });
