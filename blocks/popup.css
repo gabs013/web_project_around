@@ -27,9 +27,20 @@
   box-sizing: border-box;
 }
 
+/*Nuevo código*/
+.popup__container_send {
+  width: 430px;
+  min-height: 181px;
+}
+
 .popup__form {
   display: flex;
   flex-direction: column;
+}
+
+/*Código nuevo*/
+.popup__form_send {
+  text-align: center;
 }
 
 .popup__title {
@@ -88,7 +99,10 @@
   border-radius: 2px;
   cursor: pointer;
   margin: 0 auto;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease,
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease,
     transform 0.2s ease;
 }
 

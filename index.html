@@ -110,7 +110,7 @@
     <!--Nuevo código-->
     <!-- NUEVO: Popup de confirmación para eliminar tarjeta (AGREGADO AQUÍ) -->
     <div class="popup" id="popup-confirm-delete">
-      <div class="popup__container">
+      <div class="popup__container popup__container_send">
         <button type="button" class="popup__close-button">
           <img
             src="./images/close-icon-desktop.png"
@@ -126,11 +126,9 @@
           />
         </button>
 
-        <form class="popup__form form">
+        <form class="popup__form popup__form_send">
           <h1 class="popup__title">¿Estás seguro?</h1>
-          <p class="popup__text">Esta acción no se puede deshacer.</p>
           <button type="submit" class="popup__button popup__submit">Sí</button>
-          <button type="button" class="popup__button popup__cancel">No</button>
         </form>
       </div>
     </div>
