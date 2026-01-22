@@ -4,6 +4,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import Api from "../components/Api.js";
 import { initialCards } from "../utils/constants.js";
 
 // Elementos del DOM
