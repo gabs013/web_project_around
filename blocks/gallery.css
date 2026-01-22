@@ -87,6 +87,15 @@
   content: url("../images/Union.png");
 }
 
+/*Código nuevo del Sprint 12*/
+.gallery__like-count {
+  font-size: 13px;
+  line-height: 16px;
+  color: #000;
+  text-align: center;
+  margin-top: 3px;
+}
+
 @media screen and (min-width: 581px) and (max-width: 900px) {
   .gallery {
     width: 581px;

@@ -81,7 +81,7 @@ export default class Api {
 }
 
 // INSTANCIA DE LA API (¡USO DE MI TOKEN!)
-const api = new Api({
+export const api = new Api({
   baseUrl: "https://around-api.es.tripleten-services.com/v1",
   headers: {
     authorization: "0d8cff7c-aff7-40ae-b2cb-b0a409b0e764", // <-- ¡Mi Token!

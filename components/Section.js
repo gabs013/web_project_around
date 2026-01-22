@@ -18,4 +18,9 @@ export default class Section {
   addItemAtBeginning(element) {
     this._container.prepend(element);
   }
+
+  // Section.js - Agrega este método a tu clase existente
+  setItems(items) {
+    this._items = items;
+  }
 }
