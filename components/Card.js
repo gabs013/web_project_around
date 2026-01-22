@@ -4,12 +4,12 @@ export default class Card {
     link,
     templateSelector,
     handleImageClick,
-    cardId, // Nuevo: ID de la tarjeta
-    userId, // Nuevo: ID del usuario actual
-    ownerId, // Nuevo: ID del dueño de la tarjeta
-    likes = [], // Nuevo: Array de likes
-    api, // Nuevo: Instancia de API
-    handleDeleteClick, //Nuevo: callback para eliminar
+    cardId, // ID de la tarjeta
+    userId, // ID del usuario actual
+    ownerId, // ID del dueño de la tarjeta
+    likes = [], // Array de likes
+    api, // Instancia de API
+    handleDeleteClick, // Callback para eliminar
   ) {
     this._name = name;
     this._link = link;
@@ -20,9 +20,8 @@ export default class Card {
     this._ownerId = ownerId;
     this._likes = likes;
     this._api = api;
-    this._isLiked = this._checkIfLiked();
-    // ... resto del constructor ...
     this._handleDeleteClick = handleDeleteClick; // Guardar callback
+    this._isLiked = this._checkIfLiked();
   }
 
   // Verificar si el usuario actual dio like
@@ -30,7 +29,7 @@ export default class Card {
     return this._likes.some((like) => like._id === this._userId);
   }
 
-  //Método para obtener y clonar el Template
+  // Método para obtener y clonar el Template
   _getTemplate() {
     const galleryTemplate = document
       .querySelector(this._templateSelector)
@@ -40,11 +39,8 @@ export default class Card {
     return galleryTemplate;
   }
 
-  // En Card.js, agrega este método:
-  //Para que se vean los botecitos de basura y se remuevan (creo)
+  // Método para eliminar tarjeta (fallback si no hay callback)
   _remove() {
-    // Aquí deberías abrir el popup de confirmación
-    // Por ahora, eliminemos directamente:
     this._api
       .deleteCard(this._cardId)
       .then(() => {
@@ -93,10 +89,16 @@ export default class Card {
     // Botones de like
     this._likeButton.addEventListener("click", () => this._toggleLike());
 
-    // Eliminar carta (solo si es del usuario actual)
+    // Eliminar carta (solo si es del usuario actual) - ¡CORREGIDO!
     if (this._ownerId === this._userId) {
       this._trashButton.addEventListener("click", () => {
-        this._remove();
+        // USAR el callback handleDeleteClick en lugar de _remove()
+        if (this._handleDeleteClick) {
+          this._handleDeleteClick(this._cardId, this._element);
+        } else {
+          // Fallback si por alguna razón no hay callback
+          this._remove();
+        }
       });
     } else {
       // Ocultar botón de basura si no es del usuario

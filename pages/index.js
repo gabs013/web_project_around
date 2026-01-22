@@ -39,7 +39,8 @@ function createCard(cardData) {
     },
     cardData._id, // Pasar el ID de la tarjeta
     userId, // Pasar el ID del usuario
-    cardData.owner._id, // Pasar el ID del dueño
+    /*cardData.owner._id, // Pasar el ID del dueño*/
+    cardData.owner._id || cardData.owner,
     cardData.likes || [], // Pasar los likes
     api, // Pasar la instancia de API
     // NUEVO: callback para eliminar (abre popup de confirmación)
