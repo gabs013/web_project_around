@@ -88,13 +88,13 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
     // Guarda el ID del usuario
     userId = userData._id;
-    console.log("🆔 MI USER ID:", userId);
+    console.log("MI USER ID:", userId);
 
     // 2. Verifica cada tarjeta que viene del servidor
-    console.log("📦 TOTAL TARJETAS RECIBIDAS:", cardsData.length);
+    console.log("TOTAL TARJETAS RECIBIDAS:", cardsData.length);
 
     cardsData.forEach((card, index) => {
-      console.log(`\n📊 TARJETA ${index}:`);
+      console.log(`\n TARJETA ${index}:`);
       console.log("   ID:", card._id);
       console.log("   NOMBRE:", card.name);
       console.log("   LIKES:", card.likes);
@@ -102,14 +102,14 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       console.log("   OWNER ID:", card.owner);
     });
 
-    console.log("\n✅ DATOS LISTOS - Renderizando tarjetas...");
+    console.log("\n DATOS LISTOS - Renderizando tarjetas...");
 
     // 3. Renderiza las tarjetas
     gallerySection.setItems(cardsData);
     gallerySection.renderItems();
   })
   .catch((err) => {
-    console.error(`❌ ERROR al cargar los datos iniciales: ${err}`);
+    console.error(`ERROR al cargar los datos iniciales: ${err}`);
   });
 
 // Instancia del popup para editar perfil
