@@ -77,7 +77,7 @@ const gallerySection = new Section(
 // Parte donde se cargan los datos iniciales del servidor
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
-    console.log("👤 DATOS DEL USUARIO:", userData);
+    console.log("DATOS DEL USUARIO:", userData);
 
     //Rellena el perfil del usuario
     userInfo.setUserInfo({
@@ -95,11 +95,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
     cardsData.forEach((card, index) => {
       console.log(`\n TARJETA ${index}:`);
-      console.log("   ID:", card._id);
-      console.log("   NOMBRE:", card.name);
-      console.log("   LIKES:", card.likes);
-      console.log("   isLiked:", card.isLiked);
-      console.log("   OWNER ID:", card.owner);
+      console.log("ID:", card._id);
+      console.log("NOMBRE:", card.name);
+      console.log("LIKES:", card.likes);
+      console.log("isLiked:", card.isLiked);
+      console.log("OWNER ID:", card.owner);
     });
 
     console.log("\n DATOS LISTOS - Renderizando tarjetas...");
