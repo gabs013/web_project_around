@@ -22,8 +22,7 @@
   border-radius: 50%;
 }
 
-/*Nuevo código*/
-/* Estilos para el overlay de edición de avatar */
+/*Estilos para el overlay de mi de avatar*/
 .header__image-container {
   position: relative;
   display: inline-block;

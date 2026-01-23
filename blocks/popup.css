@@ -27,13 +27,11 @@
   box-sizing: border-box;
 }
 
-/*Nuevo código*/
 .popup__container_photo {
   width: 430px;
   min-height: 272px;
 }
 
-/*Nuevo código*/
 .popup__container_send {
   width: 430px;
   min-height: 181px;
@@ -44,7 +42,6 @@
   flex-direction: column;
 }
 
-/*Código nuevo*/
 .popup__form_send {
   text-align: center;
 }
