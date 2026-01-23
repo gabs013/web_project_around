@@ -50,7 +50,8 @@ function createCard(cardData) {
     },
     cardId,
     userId,
-    cardData.owner?._id,
+    //cardData.owner?._id,
+    typeof cardData.owner === "object" ? cardData.owner._id : cardData.owner,
     [],
     api,
     (cardId, cardElement) => {
@@ -74,16 +75,16 @@ const gallerySection = new Section(
   ".gallery__photos",
 );
 
-// ==================== CARGAR DATOS INICIALES DEL SERVIDOR ====================
+// Parte donde se cargan los datos iniciales del servidor
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
     console.log("👤 DATOS DEL USUARIO:", userData);
 
-    // 1. Rellenar el perfil del usuario
+    //Rellena el perfil del usuario
     userInfo.setUserInfo({
       name: userData.name,
       description: userData.about,
-      avatar: userData.avatar, // NUEVO: Actualizar avatar desde servidor
+      avatar: userData.avatar, //Actualizar el avatar desde el servidor
     });
 
     // Guardar el ID del usuario (IMPORTANTE)
