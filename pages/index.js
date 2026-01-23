@@ -5,9 +5,7 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import UserInfo from "../components/UserInfo.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-/*import Api from "../components/Api.js";*/
 import { api } from "../components/Api.js";
-/*import { initialCards } from "../utils/constants.js";*/
 
 // Elementos del DOM
 const editButton = document.querySelector(".header__edit-button");
@@ -16,7 +14,6 @@ const galleryAddButton = document.querySelectorAll(".header__create-button");
 const formCreateCard = document.querySelector("#form-create-card");
 
 // Variable global para guardar el ID del usuario
-//Para cargar datos del servidor
 let userId;
 
 // Instancia de UserInfo
@@ -28,9 +25,8 @@ const userInfo = new UserInfo({
 // Instancia de PopupWithImage
 const imagePopup = new PopupWithImage(".popup-image");
 
-// Función para crear tarjetas (MODIFICADA para usar datos del servidor y popup de confirmación)
+// Función para crear tarjetas
 function createCard(cardData) {
-  // ✅ CAMBIO 1: blindar el ID
   const cardId = cardData._id;
 
   console.log("ID DE TARJETA DESDE EL SERVIDOR:", cardId);
@@ -40,6 +36,11 @@ function createCard(cardData) {
     return;
   }
 
+  // ✅ CAMBIO IMPORTANTE: El servidor usa isLiked, no likes array
+  // Si isLiked es true, significa que el usuario actual ya dio like
+  // Pero como no tenemos array de likes, usamos un array vacío
+  // y determinamos isLiked desde cardData.isLiked
+
   const card = new Card(
     cardData.name,
     cardData.link,
@@ -47,14 +48,16 @@ function createCard(cardData) {
     (url, caption) => {
       imagePopup.open(url, caption);
     },
-    cardId, // ✅ ID GARANTIZADO
+    cardId,
     userId,
     cardData.owner?._id,
-    Array.isArray(cardData.likes) ? cardData.likes : [],
+    [], // ← Array VACÍO porque el servidor no devuelve likes array
     api,
     (cardId, cardElement) => {
       deleteConfirmPopup.open(cardId, cardElement);
     },
+    // ✅ NUEVO: pasar isLiked directamente
+    cardData.isLiked || false, // Valor por defecto false si no existe
   );
 
   return card.generateCard();
@@ -72,16 +75,18 @@ const gallerySection = new Section(
   ".gallery__photos",
 );
 
-// CARGAR DATOS INICIALES DEL SERVIDOR
+// ==================== CARGAR DATOS INICIALES DEL SERVIDOR ====================
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
+    console.log("👤 DATOS DEL USUARIO:", userData);
+
     // 1. Rellenar el perfil del usuario
     userInfo.setUserInfo({
       name: userData.name,
       description: userData.about,
     });
 
-    // Actualizar avatar si tienes un elemento para ello
+    // Actualizar avatar
     const profileAvatar = document.querySelector(".header__image");
     if (profileAvatar) {
       profileAvatar.src = userData.avatar;
@@ -89,23 +94,58 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
     // Guardar el ID del usuario (IMPORTANTE)
     userId = userData._id;
+    console.log("🆔 MI USER ID:", userId);
 
-    // 2. Renderizar las tarjetas desde el servidor
+    // 2. Verificar cada tarjeta que viene del servidor
+    console.log("📦 TOTAL TARJETAS RECIBIDAS:", cardsData.length);
+
+    cardsData.forEach((card, index) => {
+      console.log(`\n📊 TARJETA ${index}:`);
+      console.log("   ID:", card._id);
+      console.log("   NOMBRE:", card.name);
+      console.log("   LIKES:", card.likes);
+      console.log("   isLiked:", card.isLiked);
+      console.log("   OWNER ID:", card.owner);
+
+      // Verificar estructura de likes
+      if (card.likes && Array.isArray(card.likes)) {
+        console.log("   NÚMERO DE LIKES:", card.likes.length);
+        if (card.likes.length > 0) {
+          console.log("   PRIMER LIKE:", card.likes[0]);
+          console.log("   TIPO DEL PRIMER LIKE:", typeof card.likes[0]);
+
+          // Verificar si el like contiene mi userId
+          const userGaveLike = card.likes.some((like) => {
+            if (typeof like === "string") {
+              return like === userId;
+            } else if (like && typeof like === "object") {
+              return like._id === userId;
+            }
+            return false;
+          });
+          console.log("   ¿YO DI LIKE?:", userGaveLike);
+        }
+      }
+    });
+
+    console.log("\n✅ DATOS LISTOS - Renderizando tarjetas...");
+
+    // 3. Renderizar las tarjetas
     gallerySection.setItems(cardsData);
     gallerySection.renderItems();
   })
   .catch((err) => {
-    console.error(`Error al cargar los datos iniciales: ${err}`);
+    console.error(`❌ ERROR al cargar los datos iniciales: ${err}`);
   });
+// ==================== FIN DE CARGA DE DATOS ====================
 
-// Instancia del popup para editar perfil (MODIFICADA con "Guardando...")
+// Instancia del popup para editar perfil
 const editProfileFormPopup = new PopupWithForm(
   "#popup-edit-profile",
   (inputValues) => {
     const submitButton = formProfileInformation.querySelector(".popup__submit");
     const originalText = submitButton.textContent;
 
-    // Cambiar texto a "Guardando..."
     submitButton.textContent = "Guardando...";
 
     api
@@ -114,7 +154,6 @@ const editProfileFormPopup = new PopupWithForm(
         about: inputValues.about,
       })
       .then((userData) => {
-        // Actualizar información del usuario
         userInfo.setUserInfo({
           name: userData.name,
           description: userData.about,
@@ -123,20 +162,18 @@ const editProfileFormPopup = new PopupWithForm(
       })
       .catch((err) => console.error(`Error al editar perfil: ${err}`))
       .finally(() => {
-        // Restaurar texto original
         submitButton.textContent = originalText;
       });
   },
 );
 
-// Instancia del popup para crear nuevas tarjetas (MODIFICADA con "Guardando...")
+// Instancia del popup para crear nuevas tarjetas
 const createCardFormPopup = new PopupWithForm(
   "#popup-create-cards",
   (inputValues) => {
     const submitButton = formCreateCard.querySelector(".popup__submit");
     const originalText = submitButton.textContent;
 
-    // Cambiar texto a "Guardando..."
     submitButton.textContent = "Guardando...";
 
     api
@@ -145,14 +182,12 @@ const createCardFormPopup = new PopupWithForm(
         link: inputValues.link,
       })
       .then((newCard) => {
-        // Crear y añadir la nueva tarjeta
         const cardElement = createCard(newCard);
         gallerySection.addItemAtBeginning(cardElement);
         createCardFormPopup.close();
       })
       .catch((err) => console.error(`Error al crear tarjeta: ${err}`))
       .finally(() => {
-        // Restaurar texto original
         submitButton.textContent = originalText;
       });
   },
@@ -162,7 +197,6 @@ const createCardFormPopup = new PopupWithForm(
 const deleteConfirmPopup = new PopupWithConfirmation(
   "#popup-confirm-delete",
   (cardId, cardElement) => {
-    // Esto se ejecuta cuando el usuario hace clic en "Sí"
     api
       .deleteCard(cardId)
       .then(() => {
@@ -191,17 +225,12 @@ deleteConfirmPopup.setEventListeners();
 
 // Event Listeners para abrir popups
 editButton.addEventListener("click", () => {
-  // Obtener información actual del usuario
   const currentUserInfo = userInfo.getUserInfo();
-
-  // Llenar el formulario con los datos actuales
   const form = document.querySelector("#form-edit-profile");
   form.querySelector("#inputName").value = currentUserInfo.name;
   form.querySelector("#inputDescription").value = currentUserInfo.description;
 
   formEditValidator.resetValidation();
-
-  // Abrir popup
   editProfileFormPopup.open();
 });
 

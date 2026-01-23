@@ -4,16 +4,16 @@ export default class Card {
     link,
     templateSelector,
     handleImageClick,
-    cardId, // ID de la tarjeta
-    userId, // ID del usuario actual
-    ownerId, // ID del dueño de la tarjeta
-    likes = [], // Array de likes
-    api, // Instancia de API
-    handleDeleteClick, // Callback para eliminar
+    cardId,
+    userId,
+    ownerId,
+    likes = [], // El servidor no usa esto
+    api,
+    handleDeleteClick,
+    isLikedFromServer = false, // ✅ NUEVO PARÁMETRO
   ) {
     console.log("🔍 CONSTRUCTOR Card - cardId recibido:", cardId);
-    console.log("🔍 CONSTRUCTOR Card - cardId tipo:", typeof cardId);
-    console.log("🔍 CONSTRUCTOR Card - cardId longitud:", cardId?.length);
+    console.log("🔍 CONSTRUCTOR Card - isLikedFromServer:", isLikedFromServer);
 
     this._name = name;
     this._link = link;
@@ -22,11 +22,18 @@ export default class Card {
     this._cardId = cardId;
     this._userId = userId;
     this._ownerId = ownerId;
-    this._likes = Array.isArray(likes) ? likes : [];
-    this._isLiked = this._checkIfLiked(); //Esto depende de ._likes
+    this._likes = []; // ← Array vacío porque el servidor no lo usa
     this._api = api;
-    this._handleDeleteClick = handleDeleteClick; // Guardar callback
+    this._handleDeleteClick = handleDeleteClick;
+
+    // ✅ CLAVE: Usar isLikedFromServer directamente
+    this._isLiked = Boolean(isLikedFromServer);
+
+    console.log("🔍 Card - isLiked inicial:", this._isLiked);
   }
+
+  // ✅ ELIMINA el método _checkIfLiked (ya no lo necesitamos)
+  // Porque el servidor nos dice directamente isLiked
 
   // Verificar si el usuario actual dio like
   /*_checkIfLiked() {
@@ -38,9 +45,6 @@ export default class Card {
     });
   }*/
   //Antigui código del de arriba
-  _checkIfLiked() {
-    return this._likes.some((like) => like._id === this._userId);
-  }
 
   // Método para obtener y clonar el Template
   _getTemplate() {
@@ -64,35 +68,75 @@ export default class Card {
 
   // Alternar like (ahora llama a la API)
   _toggleLike() {
-    // ✅ CAMBIO 2: validación dura del ID
-    if (!this._cardId) {
-      console.error("❌ cardId inválido:", this._cardId);
+    console.log("🔄 TOGGLE LIKE - Estado actual isLiked:", this._isLiked);
+    console.log("🔄 TOGGLE LIKE - cardId a enviar:", this._cardId);
+
+    // Validación del ID
+    if (!this._cardId || this._cardId.length < 10) {
+      console.error("❌ ERROR: cardId inválido:", this._cardId);
       return;
     }
 
-    if (this._isLiked) {
-      this._api
-        .removeLike(this._cardId)
-        .then((updatedCard) => {
-          this._likes = updatedCard.likes;
-          this._isLiked = false;
-          this._likeButton.classList.remove("gallery__like-button--active");
-          this._updateLikeCount(this._likes.length);
-        })
-        .catch(console.error);
-    } else {
-      this._api
-        .addLike(this._cardId)
-        .then((updatedCard) => {
-          this._likes = updatedCard.likes;
-          this._isLiked = true;
-          this._likeButton.classList.add("gallery__like-button--active");
-          this._updateLikeCount(this._likes.length);
-        })
-        .catch(console.error);
-    }
-  }
+    // Guardar estado anterior
+    const wasLiked = this._isLiked;
 
+    // Cambiar visualmente inmediatamente (mejor UX)
+    this._likeButton.classList.toggle("gallery__like-button--active");
+    this._isLiked = !wasLiked;
+
+    // Actualizar contador visualmente
+    const currentLikeCount = this._likes.length;
+    const newLikeCount = wasLiked
+      ? Math.max(0, currentLikeCount - 1)
+      : currentLikeCount + 1;
+    this._updateLikeCount(newLikeCount);
+
+    // Determinar qué acción tomar
+    const apiCall = wasLiked
+      ? this._api.removeLike(this._cardId)
+      : this._api.addLike(this._cardId);
+
+    apiCall
+      .then((updatedCard) => {
+        console.log("✅ Respuesta del servidor:", updatedCard);
+
+        // ✅ CLAVE: El servidor devuelve isLiked, no likes
+        if (typeof updatedCard.isLiked === "boolean") {
+          this._isLiked = updatedCard.isLiked;
+          console.log("📊 isLiked actualizado desde servidor:", this._isLiked);
+        }
+
+        // También podría devolver likes count
+        if (updatedCard.likes !== undefined) {
+          this._likes = Array.isArray(updatedCard.likes)
+            ? updatedCard.likes
+            : [];
+        }
+
+        // Sincronizar el botón con el estado REAL del servidor
+        if (this._isLiked) {
+          this._likeButton.classList.add("gallery__like-button--active");
+        } else {
+          this._likeButton.classList.remove("gallery__like-button--active");
+        }
+
+        // Actualizar contador (si el servidor devolvió datos)
+        if (updatedCard.likes && Array.isArray(updatedCard.likes)) {
+          this._updateLikeCount(updatedCard.likes.length);
+        } else {
+          // Si no, mantener nuestro cálculo estimado
+          this._updateLikeCount(newLikeCount);
+        }
+      })
+      .catch((error) => {
+        console.error("❌ Error en la petición de like:", error);
+
+        // Revertir cambios visuales si falla
+        this._isLiked = wasLiked;
+        this._likeButton.classList.toggle("gallery__like-button--active");
+        this._updateLikeCount(currentLikeCount);
+      });
+  }
   /*_toggleLike() {
     if (this._isLiked) {
       this._api.removeLike(this._cardId).then((updatedCard) => {
@@ -179,7 +223,7 @@ export default class Card {
     this._likeButton = this._element.querySelector(".gallery__like-button");
     this._trashButton = this._element.querySelector(".gallery__trash-button");
 
-    // Crear elemento para contador de likes (si no existe)
+    // Crear elemento para contador de likes
     if (!this._element.querySelector(".gallery__like-count")) {
       const likeCount = document.createElement("span");
       likeCount.className = "gallery__like-count";
@@ -198,17 +242,17 @@ export default class Card {
     this._imageElement.alt = this._name;
     this._textElement.textContent = this._name;
 
-    this._isLiked = this._checkIfLiked();
+    // ✅ NO llamar a _checkIfLiked() - usar el valor que ya tenemos
+    // this._isLiked ya fue establecido en el constructor con isLikedFromServer
 
-    // Establecer estado inicial del like (YA SINCRONIZADO)
+    // Establecer estado inicial del like
     if (this._isLiked) {
       this._likeButton.classList.add("gallery__like-button--active");
+      this._updateLikeCount(1); // Si isLiked es true, al menos hay 1 like (el tuyo)
     } else {
       this._likeButton.classList.remove("gallery__like-button--active");
+      this._updateLikeCount(0);
     }
-
-    // Mostrar contador de likes
-    this._updateLikeCount(this._likes.length);
 
     this._setEventListeners();
 

@@ -67,7 +67,7 @@
   color: #000000;
 }
 
-.gallery__like-button {
+/*.gallery__like-button {
   background: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -77,23 +77,31 @@
   padding-right: 15px;
   padding-bottom: 31px;
   cursor: pointer;
-}
+}*/
 
 .gallery__like-button {
-  content: url("../images/Vector.svg");
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 21px;
+  height: 19px;
+  background-image: url("../images/Vector.svg"); /* Corazón vacío */
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
+/* Estilo para el botón de like ACTIVO */
 .gallery__like-button--active {
-  content: url("../images/Union.png");
+  background-image: url("../images/Union.png"); /* Corazón lleno */
 }
 
-/*Código nuevo del Sprint 12*/
+/* Contador de likes */
 .gallery__like-count {
   font-size: 13px;
   line-height: 16px;
   color: #000;
   text-align: center;
-  margin-top: 3px;
+  margin-left: 5px;
 }
 
 @media screen and (min-width: 581px) and (max-width: 900px) {
