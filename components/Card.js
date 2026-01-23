@@ -11,6 +11,10 @@ export default class Card {
     api, // Instancia de API
     handleDeleteClick, // Callback para eliminar
   ) {
+    console.log("🔍 CONSTRUCTOR Card - cardId recibido:", cardId);
+    console.log("🔍 CONSTRUCTOR Card - cardId tipo:", typeof cardId);
+    console.log("🔍 CONSTRUCTOR Card - cardId longitud:", cardId?.length);
+
     this._name = name;
     this._link = link;
     this._templateSelector = templateSelector;
@@ -18,13 +22,22 @@ export default class Card {
     this._cardId = cardId;
     this._userId = userId;
     this._ownerId = ownerId;
-    this._likes = likes;
+    this._likes = Array.isArray(likes) ? likes : [];
+    this._isLiked = this._checkIfLiked(); //Esto depende de ._likes
     this._api = api;
     this._handleDeleteClick = handleDeleteClick; // Guardar callback
-    this._isLiked = this._checkIfLiked();
   }
 
   // Verificar si el usuario actual dio like
+  /*_checkIfLiked() {
+    return this._likes.some((like) => {
+      if (typeof like === "string") {
+        return like === this._userId;
+      }
+      return like._id === this._userId;
+    });
+  }*/
+  //Antigui código del de arriba
   _checkIfLiked() {
     return this._likes.some((like) => like._id === this._userId);
   }
@@ -51,6 +64,53 @@ export default class Card {
 
   // Alternar like (ahora llama a la API)
   _toggleLike() {
+    // ✅ CAMBIO 2: validación dura del ID
+    if (!this._cardId) {
+      console.error("❌ cardId inválido:", this._cardId);
+      return;
+    }
+
+    if (this._isLiked) {
+      this._api
+        .removeLike(this._cardId)
+        .then((updatedCard) => {
+          this._likes = updatedCard.likes;
+          this._isLiked = false;
+          this._likeButton.classList.remove("gallery__like-button--active");
+          this._updateLikeCount(this._likes.length);
+        })
+        .catch(console.error);
+    } else {
+      this._api
+        .addLike(this._cardId)
+        .then((updatedCard) => {
+          this._likes = updatedCard.likes;
+          this._isLiked = true;
+          this._likeButton.classList.add("gallery__like-button--active");
+          this._updateLikeCount(this._likes.length);
+        })
+        .catch(console.error);
+    }
+  }
+
+  /*_toggleLike() {
+    if (this._isLiked) {
+      this._api.removeLike(this._cardId).then((updatedCard) => {
+        this._likes = updatedCard.likes; // 🔴 CLAVE
+        this._isLiked = false;
+        this._likeButton.classList.remove("gallery__like-button--active");
+        this._updateLikeCount(this._likes.length);
+      });
+    } else {
+      this._api.addLike(this._cardId).then((updatedCard) => {
+        this._likes = updatedCard.likes || []; // ← ESTA ES LA LÍNEA CLAVE
+        this._isLiked = true;
+        this._likeButton.classList.add("gallery__like-button--active");
+        this._updateLikeCount(this._likes.length);
+      });
+    }
+  }*/
+  /*_toggleLike() {
     if (this._isLiked) {
       // Quitar like
       this._api
@@ -72,7 +132,7 @@ export default class Card {
         })
         .catch((err) => console.error(`Error al dar like: ${err}`));
     }
-  }
+  }*/
 
   // Actualizar contador de likes
   _updateLikeCount(count) {
@@ -138,9 +198,13 @@ export default class Card {
     this._imageElement.alt = this._name;
     this._textElement.textContent = this._name;
 
-    // Establecer estado inicial del like
+    this._isLiked = this._checkIfLiked();
+
+    // Establecer estado inicial del like (YA SINCRONIZADO)
     if (this._isLiked) {
       this._likeButton.classList.add("gallery__like-button--active");
+    } else {
+      this._likeButton.classList.remove("gallery__like-button--active");
     }
 
     // Mostrar contador de likes

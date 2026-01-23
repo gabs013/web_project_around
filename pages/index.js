@@ -30,6 +30,16 @@ const imagePopup = new PopupWithImage(".popup-image");
 
 // Función para crear tarjetas (MODIFICADA para usar datos del servidor y popup de confirmación)
 function createCard(cardData) {
+  // ✅ CAMBIO 1: blindar el ID
+  const cardId = cardData._id;
+
+  console.log("ID DE TARJETA DESDE EL SERVIDOR:", cardId);
+
+  if (!cardId) {
+    console.error("❌ ERROR: la tarjeta no tiene _id", cardData);
+    return;
+  }
+
   const card = new Card(
     cardData.name,
     cardData.link,
@@ -37,17 +47,16 @@ function createCard(cardData) {
     (url, caption) => {
       imagePopup.open(url, caption);
     },
-    cardData._id, // Pasar el ID de la tarjeta
-    userId, // Pasar el ID del usuario
-    /*cardData.owner._id, // Pasar el ID del dueño*/
-    cardData.owner._id || cardData.owner,
-    cardData.likes || [], // Pasar los likes
-    api, // Pasar la instancia de API
-    // NUEVO: callback para eliminar (abre popup de confirmación)
+    cardId, // ✅ ID GARANTIZADO
+    userId,
+    cardData.owner?._id,
+    Array.isArray(cardData.likes) ? cardData.likes : [],
+    api,
     (cardId, cardElement) => {
       deleteConfirmPopup.open(cardId, cardElement);
     },
   );
+
   return card.generateCard();
 }
 
