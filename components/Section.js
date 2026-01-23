@@ -19,7 +19,7 @@ export default class Section {
     this._container.prepend(element);
   }
 
-  // Section.js - Agrega este método a tu clase existente
+  // Section.js - Este método se agrega a mi clase existente
   setItems(items) {
     this._items = items;
   }
