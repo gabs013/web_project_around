@@ -1,4 +1,4 @@
-const initialCards = [
+/*const initialCards = [
   {
     name: "Porcupine Mountains",
     link: "https://images.unsplash.com/photo-1601227956428-6536f5e30920?q=80&w=1378&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -30,4 +30,4 @@ const initialCards = [
   },
 ];
 
-export { initialCards };
+export { initialCards };*/
