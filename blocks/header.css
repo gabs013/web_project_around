@@ -22,6 +22,42 @@
   border-radius: 50%;
 }
 
+/*Nuevo código*/
+/* Estilos para el overlay de edición de avatar */
+.header__image-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.header__image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__image-container:hover .header__image-overlay {
+  opacity: 1;
+}
+
+.header__edit-avatar-icon {
+  width: 26px;
+  height: 26px;
+  background-image: url("../images/edit-button.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .header__profile {
   display: flex;
   justify-content: center;

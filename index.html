@@ -107,8 +107,43 @@
       </div>
     </div>
 
-    <!--Nuevo código-->
-    <!-- NUEVO: Popup de confirmación para eliminar tarjeta (AGREGADO AQUÍ) -->
+    <!-- Formulario para editar avatar -->
+    <div class="popup" id="popup-edit-avatar">
+      <div class="popup__container popup__container_photo">
+        <button type="button" class="popup__close-button">
+          <img
+            src="./images/close-icon-desktop.png"
+            alt="Ícono para cerrar la ventana del formulario"
+            class="popup__close-icon popup__icon-desktop"
+          />
+        </button>
+        <button type="button" class="popup__close-button">
+          <img
+            src="./images/close-icon-mobile.png"
+            alt="Ícono para cerrar la ventana del formulario"
+            class="popup__close-icon popup__icon-mobile"
+          />
+        </button>
+
+        <form class="popup__form form" id="form-edit-avatar">
+          <h1 class="popup__title">Cambiar foto de perfil</h1>
+          <input
+            type="url"
+            id="input-avatar-link"
+            class="popup__input"
+            name="avatar"
+            placeholder="Enlace a la nueva imagen"
+            required
+          />
+          <span class="popup__input-error input-avatar-link-error"></span>
+          <button type="submit" class="popup__button popup__submit" disabled>
+            Guardar
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Popup de confirmación para eliminar tarjeta -->
     <div class="popup" id="popup-confirm-delete">
       <div class="popup__container popup__container_send">
         <button type="button" class="popup__close-button">
@@ -133,7 +168,7 @@
       </div>
     </div>
 
-    <!--Popup de imagen que se agranda-->
+    <!-- Popup de imagen que se agranda -->
     <div class="popup popup-image">
       <div class="popup__image-container">
         <button type="button" class="popup__close-image">
@@ -174,11 +209,18 @@
         </nav>
         <div class="header__content">
           <div class="header__left">
-            <img
-              src="./images/gabs.png"
-              alt="Fotografía de la autora de esta página: Gabriela Arroyo"
-              class="header__image"
-            />
+            <!-- Contenedor para el avatar con overlay -->
+            <div class="header__image-container">
+              <img
+                src="./images/gabs.png"
+                alt="Fotografía de la autora de esta página: Gabriela Arroyo"
+                class="header__image"
+              />
+              <div class="header__image-overlay">
+                <div class="header__edit-avatar-icon"></div>
+              </div>
+            </div>
+
             <div class="header__info">
               <div class="header__profile">
                 <h1 class="header__name">Gabriela Arroyo</h1>
@@ -191,6 +233,7 @@
               <span class="header__description">Estudiante de Tripleten</span>
             </div>
           </div>
+
           <img
             src="./images/add-button-desktop.png"
             alt="Botón para agregar contenido"
@@ -199,14 +242,14 @@
 
           <img
             src="./images/add-button-mobile.png"
-            alt="Botón para agragar contenido desde móviles"
+            alt="Botón para agregar contenido desde móviles"
             class="header__add-button-mobile header__create-button"
           />
         </div>
       </header>
       <main class="content">
         <section class="gallery">
-          <!--Aquí se insertan las tarjetas-->
+          <!-- Aquí se insertan las tarjetas -->
           <div class="gallery__photos"></div>
           <template id="gallery-template">
             <div class="gallery__photo">
