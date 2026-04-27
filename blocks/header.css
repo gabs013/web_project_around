@@ -7,7 +7,7 @@
   max-height: 120px;
   display: flex;
   justify-content: space-between;
-  margin: 40px 200px 0;
+  margin: 40px auto 0; /*40px 200px 0;*/
 }
 
 .header__left {
@@ -109,7 +109,8 @@
 
 @media screen and (min-width: 581px) and (max-width: 900px) {
   .header__content {
-    width: 581px;
+    /*width: 581px;*/
+    max-width: 581px;
     height: 587px;
     display: flex;
     flex-direction: column;

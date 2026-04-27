@@ -7,7 +7,8 @@
 .nav__logo-desktop {
   max-width: 880px;
   max-height: 74px;
-  margin: 45px 200px 0;
+  margin: 45px auto 0; /* 45px 200px 0;*/
+  /*display: block; /*nuevo*/
 }
 
 .nav__logo-mobile {

@@ -9,7 +9,7 @@
 }
 
 @media screen and (min-width: 581px) and (max-width: 900px) {
-  .page {
+  page {
     min-width: 581px;
   }
 }
